@@ -1,47 +1,82 @@
 ---
-title: 'knowledge'
-description: 'the second stream — a compounding knowledge base that gets smarter every day.'
-icon: 'brain'
+title: knowledge
+description: a compounding knowledge base that gets smarter every day.
 ---
 
-the knowledge stream is the second input to spark. while the activity stream captures what your team does, the knowledge stream captures what your team knows.
+# knowledge
 
-drop in what you learn. a research paper. a tutorial you wrote. a competitors blog post. meeting notes. a thread that changed your thinking. each one enters the system as a **knowledge unit** and gets processed by the knowledge ingest agent into a living, cross-referenced wiki.
+> a compounding knowledge base that gets smarter every day.
 
-## why this exists
+most teams' knowledge is scattered. docs rot in notion. meeting notes disappear into slack. research lives in someone's head. competitive intel sits in a google doc nobody updates.
 
-most teams knowledge is scattered. docs rot in notion. meeting notes disappear into slack. research lives in someones head. competitive intel sits in a google doc nobody updates.
-
-the problem isnt that the knowledge doesnt exist. its that nobody maintains it. humans abandon wikis because the maintenance burden grows faster than the value. updating cross-references, keeping summaries current, noting when new data contradicts old claims. nobody wants to do that.
+the problem isn't that the knowledge doesn't exist. it's that nobody maintains it. humans abandon wikis because the maintenance burden grows faster than the value — updating cross-references, keeping summaries current, noting when new data contradicts old claims.
 
 <Note>
-  ai does. it doesnt get bored. it doesnt forget to update a cross-reference. it can touch 15 files in one pass. the maintenance cost is near zero.
+  AI does. it doesn't get bored. it doesn't forget to update a cross-reference. it can touch 15 pages in one pass. the maintenance cost is near zero.
 </Note>
+
+## how it works
+
+you feed knowledge in. the AI builds a living wiki from it.
+
+<Steps>
+  <Step title="feed" icon="file-plus">
+    [push in sources](/knowledge/sources) — URLs, documents, notes, or sessions. each one is a knowledge unit.
+  </Step>
+
+  <Step title="synthesize" icon="combine">
+    the knowledge ingest agent reads each source, extracts entities, concepts, and claims, and [writes wiki pages](/knowledge/pages) that integrate with everything already known.
+  </Step>
+
+  <Step title="connect" icon="git-compare">
+    every page gets [linked to related pages](/knowledge/graph) with typed relationships — mentions, dependencies, contradictions, hierarchies. backlinks are automatic.
+  </Step>
+
+  <Step title="maintain" icon="shield-check">
+    the [health system](/knowledge/health) monitors for contradictions, stale pages, orphans, gaps, and unsourced claims. issues get flagged or auto-resolved.
+  </Step>
+
+  <Step title="enrich" icon="search">
+    the AI identifies what's missing and [goes to find it](/knowledge/enrichment) — searching the live web for current information, filling gaps, checking freshness.
+  </Step>
+</Steps>
 
 ## how it compounds
 
 <Steps>
   <Step title="week 1" icon="calendar-days">
-    you have 20 pages with a few cross-references. useful but sparse.
+    20 pages with a few cross-references. useful but sparse.
   </Step>
+
   <Step title="month 3" icon="network">
     200 pages with hundreds of connections. patterns emerge that no single source contained. contradictions have been flagged. concepts that seemed unrelated are now linked.
   </Step>
+
   <Step title="month 6" icon="brain">
-    an organizational brain that knows more about your domain than any individual on the team. the knowledge base has been enriched with intelligence the ai found on its own. its not just what you put in. its what the system discovered.
+    an organizational brain. the system has been enriched with intelligence the AI found on its own. it's not just what you put in — it's what the system discovered.
   </Step>
 </Steps>
 
 this compounding effect is what makes knowledge different from a folder of files or a chatbot with memory. it genuinely gets smarter over time.
 
-## the bridge
+<CardGroup cols={2}>
+  <Card title="sources" icon="file-plus" href="/knowledge/sources">
+    knowledge units — how to feed the system.
+  </Card>
 
-the activity stream and knowledge stream arent separate silos. they connect.
+  <Card title="pages" icon="file-text" href="/knowledge/pages">
+    the synthesized wiki the AI builds.
+  </Card>
 
-sessions can become knowledge sources. when work produces insights worth remembering, push it to knowledge. knowledge informs sessions. when you view work, spark shows related knowledge. and when you ask spark a question, it draws on both streams to give you the full picture.
+  <Card title="graph" icon="git-compare" href="/knowledge/graph">
+    how knowledge connects.
+  </Card>
 
-<Note>two streams. connected. both feeding the same ai.</Note>
+  <Card title="health" icon="shield-check" href="/knowledge/health">
+    keeping the knowledge base accurate.
+  </Card>
 
-<Card title="next: sources" icon="arrow-right" href="/knowledge/sources">
-  knowledge units — how to feed the system and what happens when you do.
-</Card>
+  <Card title="enrichment" icon="search" href="/knowledge/enrichment">
+    live web research and gap-filling.
+  </Card>
+</CardGroup>

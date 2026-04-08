@@ -1,0 +1,119 @@
+---
+title: sessions
+description: the core unit of work in spark — how events become meaningful, scored intelligence.
+---
+
+# sessions
+
+> the core unit of work in spark — how events become meaningful, scored intelligence.
+
+a session is what happens when you zoom out from individual events and see the work.
+
+22 commits to the same repo by the same person over 3 hours isn't 22 separate things. it's one thing: "alex worked on the onboarding redesign." that's a session.
+
+sessions are the atomic unit of everything in spark. they're what gets scored. they're what shows up on dashboards and leaderboards. they're what spark AI queries against. they're what feeds into goal tracking. when you ask "what happened today?" the answer is a list of sessions.
+
+## how sessions form
+
+the system watches the event stream and groups related events automatically using three signals:
+
+| signal        | how it works                                                                                                                                  |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **actor**     | events from the same person or AI agent get grouped together. maya's commits don't merge with alex's.                                         |
+| **time**      | events cluster by proximity. a burst of commits over two hours is one session. a three-hour gap starts a new one.                              |
+| **context**   | events touching the same repos, the same branches, and the same project areas cluster together. switching from the API repo to the docs repo can split a session. |
+
+you don't configure this. it happens automatically. the system learns your team's working patterns over time — what a typical session looks like for a deep-focus backend engineer vs. a PM who touches six things in an hour.
+
+<Note>
+  session boundaries are soft, not rigid. the system uses a probabilistic model, not hard time windows. two commits 90 minutes apart might be the same session (lunch break) or different sessions (context switch). the AI uses the content of the events, not just timestamps, to decide.
+</Note>
+
+## what a session contains
+
+click into any session and you get a full AI analysis of the work:
+
+### the summary
+
+the AI reads every event in the session and writes a narrative summary:
+
+> "maya implemented rate limiting for the public API. added per-key quotas with a sliding window algorithm, wrote integration tests covering the main edge cases, and opened a PR with a detailed description of the approach and tradeoffs."
+
+this isn't a list of commits. it's what a senior engineer would say if you asked "what did you do today?" — the intent, the approach, the decisions, the outcome.
+
+### the score
+
+every session gets scored by the [impact scorer](/agents/impact-scorer) across three dimensions:
+
+<CardGroup cols={3}>
+  <Card title="output" icon="gauge">
+    how much was produced — commits, files changed, PRs opened, tasks completed. adjusted for noise like auto-generated files and dependency updates.
+  </Card>
+
+  <Card title="importance" icon="star">
+    how strategically significant — work tied to team goals scores higher. shipping a feature that unblocks others scores higher than routine maintenance.
+  </Card>
+
+  <Card title="quality" icon="gem">
+    how well the work was done — clear commit messages, focused scope, PR descriptions, test coverage. the markers of craft.
+  </Card>
+</CardGroup>
+
+these combine into a single **impact points** number. the headline score. this powers leaderboards, team overviews, and spark AI's analytical queries.
+
+every score comes with written reasoning — the AI explains what it saw and why it scored the way it did. no black boxes.
+
+### the details
+
+<AccordionGroup>
+  <Accordion title="events">
+    the raw activities in chronological order. every commit, every PR action, every linked event. the evidence behind the summary.
+  </Accordion>
+
+  <Accordion title="repos and duration">
+    which codebases were touched, for how long. "2h15m across app-core and api."
+  </Accordion>
+
+  <Accordion title="skills">
+    domain areas the work touched — backend, frontend, testing, infrastructure, design. built from the content of the events, not manual tagging.
+  </Accordion>
+
+  <Accordion title="decisions and risks">
+    key choices the AI identified in the work. "chose postgres over redis for session storage." potential risks flagged: "large migration with no rollback plan."
+  </Accordion>
+
+  <Accordion title="suggested next steps">
+    what logically follows this work. "the PR is open and needs review. test coverage for edge cases could be expanded. the rate limiting config should be documented."
+  </Accordion>
+</AccordionGroup>
+
+## sessions connect to everything
+
+sessions aren't isolated cards. they're the connective tissue of the product.
+
+| connection       | how it works                                                                                                                                    |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **goals**        | sessions map to goals. when you view a goal, you see every session that contributed. when you view a session, you see which goals it advanced.   |
+| **people**       | a person's profile is built from their sessions. impact scores, skill areas, work patterns, velocity — all derived from session data.            |
+| **synthesis**    | daily and weekly summaries are written from sessions. the synthesis generator reads every session and tells you what the numbers mean.            |
+| **spark AI**     | when you ask spark a question, sessions are the primary data it queries. "what shipped this week?" returns sessions. "how's maya doing?" returns her sessions. |
+| **knowledge**    | sessions can become knowledge sources. when work produces insights worth preserving, push the session into the knowledge stream.                 |
+| **leaderboards** | team rankings are session impact totals. the leaderboard is a view over sessions, not a separate system.                                        |
+
+## AI agent sessions
+
+<Warning>
+  when AI agents work — codex writing features, claude reviewing PRs, custom agents running pipelines — their activity creates sessions too. same stream, same scoring, same visibility. same leaderboard.
+</Warning>
+
+"what did our AI agents accomplish today?" is answered the same way as "what did maya accomplish today?" human and AI work measured on the same scale.
+
+## the feedback loop
+
+disagree with how a session was scored? correct it. the feedback gets recorded — your original scores, the corrected scores, and your reason. over time, this trains the scorer to understand what your team actually values.
+
+a startup that ships fast will define "importance" differently than an enterprise team focused on reliability. the system adapts to you.
+
+<Card title="next: connecting your data" icon="arrow-right" href="/connect/overview">
+  how to plug in your tools and start the stream flowing.
+</Card>

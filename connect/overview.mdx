@@ -1,41 +1,89 @@
 ---
-title: 'connect'
-description: 'integrations, API, CLI, and MCP server reference.'
-icon: 'plug'
+title: connecting your data
+description: how to plug in your tools and start the stream flowing.
 ---
 
-spark ingests data through integrations, webhooks, and API calls. this section covers how to connect your tools and how to query spark programmatically.
+# connecting your data
 
-## three ways to connect
+> how to plug in your tools and start the stream flowing.
 
-<CardGroup cols={3}>
-  <Card title="integrations" icon="cable">
-    native connectors for github, slack, asana, linear, and shopify. events flow in automatically.
-  </Card>
-  <Card title="API & webhooks" icon="webhook">
-    custom event ingestion and full read access to all spark data over HTTP.
-  </Card>
-  <Card title="MCP server" icon="cpu">
-    AI agents query spark as native tools. works with claude desktop, cursor, and openclaw.
-  </Card>
-</CardGroup>
+spark doesn't generate data. your team does. spark watches.
 
-## pages
+connecting a tool means its events flow into the activity stream in real-time. every commit, every PR, every slack message, every task completion — as it happens. the system groups those events into sessions, scores them, synthesizes them, and makes them queryable.
+
+## what changes when you connect
+
+connecting your first tool is the moment spark goes from empty to alive. here's what happens:
+
+<Steps>
+  <Step title="events start flowing" icon="activity">
+    within seconds of connecting, events appear in the activity feed. you can see your team's work arriving in real-time.
+  </Step>
+
+  <Step title="sessions form" icon="layers">
+    the system watches the event stream and groups related events into sessions. within a few hours of normal team activity, you'll see your first scored sessions.
+  </Step>
+
+  <Step title="agents activate" icon="eye">
+    the built-in agents — impact scorer, synthesis generator, signal puller — start processing. sessions get scored. by end of day one, you have your first daily synthesis.
+  </Step>
+
+  <Step title="intelligence compounds" icon="trending-up">
+    every day adds more data. scoring gets better. syntheses get richer. patterns emerge that weren't visible in any single tool. this is the compounding effect.
+  </Step>
+</Steps>
+
+## layering tools
+
+each tool you connect adds a new dimension. the power is in the combination.
+
+<Note>
+  **github alone:** you see coding sessions — commits, PRs, reviews. who wrote what code, when, how it was reviewed.
+
+  **github + slack:** now sessions have context. that burst of commits happened right after an urgent slack thread. the impact scorer sees the connection and adjusts the importance score.
+
+  **github + slack + asana:** the full picture. code sessions link to task completions. you can see the journey from "task created" to "PR merged" to "task done." gap detection works — the system notices when tasks are moving without corresponding code activity.
+
+  **+ shopify:** ecommerce context. did that deploy correlate with an order drop? did the checkout fix actually increase conversion?
+</Note>
+
+the more tools you connect, the richer the sessions, the smarter the scoring, the more useful spark's answers become. each tool on its own is a partial view. together, they're the full picture.
+
+## five ways to connect
 
 <CardGroup cols={2}>
-  <Card title="integrations" icon="cable" href="/connect/integrations">
-    connect github, slack, asana, linear, and shopify. setup steps and events captured for each.
+  <Card title="native integrations" icon="cable" href="/connect/integrations">
+    one-click connectors for github, slack, asana, linear, and shopify. events flow automatically with no configuration beyond auth.
   </Card>
+
   <Card title="custom webhooks" icon="webhook" href="/connect/webhooks">
-    send events from any tool directly to the spark API. same ingestion pipeline as native integrations.
+    send events from any tool via HTTP POST. same ingestion pipeline as native integrations — same session grouping, same scoring, same visibility.
   </Card>
-  <Card title="API reference" icon="code" href="/connect/api">
-    seven read-only endpoints — team, person, events, summary, goals, unmapped, and health.
+
+  <Card title="API" icon="code" href="/connect/api">
+    seven read-only endpoints to query all spark data. team overviews, individual profiles, event streams, summaries, goals, and system health.
   </Card>
+
   <Card title="CLI" icon="terminal" href="/connect/cli">
-    command-line access to all API endpoints. outputs JSON, pipes cleanly to jq.
+    command-line access to all API endpoints. outputs JSON, pipes to jq. built for scripting and automation.
   </Card>
+
   <Card title="MCP server" icon="cpu" href="/connect/mcp">
-    expose spark data as MCP tools. drop into any AI agent that supports MCP.
+    expose spark as native tools for AI agents. drop into claude desktop, cursor, or openclaw and your agents can query your team's data as function calls.
   </Card>
 </CardGroup>
+
+## getting started
+
+the fastest path to value:
+
+1. **connect github.** this is the primary integration. most teams get their first scored sessions within hours.
+2. **add slack** when you want context beyond code. the signal puller starts capturing non-code activity and the impact scorer gets richer context.
+3. **add your task tracker** (asana or linear) to close the loop between planning and execution.
+4. **add custom webhooks** for anything else — internal tools, CI/CD pipelines, or services spark doesn't natively support.
+
+you don't need everything connected on day one. start with github and layer from there.
+
+<Card title="next: integrations" icon="arrow-right" href="/connect/integrations">
+  native connectors — setup steps and events captured for each tool.
+</Card>

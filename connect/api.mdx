@@ -1,20 +1,24 @@
 ---
-title: 'API reference'
-description: 'seven read-only endpoints for querying all spark data over HTTP.'
-icon: 'code'
+title: API & CLI
+description: query all spark data over HTTP or command line — seven read-only endpoints.
 ---
 
+# API & CLI
+
+> query all spark data over HTTP or command line — seven read-only endpoints.
+
+the spark API exposes seven read-only endpoints for querying your data. the CLI wraps every endpoint — same data, same params, terminal-native.
+
 <Note>
-  all endpoints are read-only. the API cannot modify data, create events, or change configuration.
+  all query endpoints are read-only. the API cannot modify data or change configuration. event ingestion is handled separately via [integrations](/connect/integrations) and [webhooks](/connect/webhooks).
 </Note>
 
-## authentication
+## setup
 
-all endpoints require bearer token auth.
+### API authentication
 
 1. generate an API key in **settings → API**
-2. set `OBSERVATORY_API_KEY` in your convex deployment environment
-3. pass the key in every request:
+2. pass the key in every request:
 
 ```bash
 Authorization: Bearer obs_your_api_key
@@ -22,22 +26,45 @@ Authorization: Bearer obs_your_api_key
 
 **base URL:** `https://your-deployment.convex.site`
 
+### CLI install
+
+```bash
+npm install -g @sparkagents/cli
+```
+
+configure your shell profile (`~/.zshrc`, `~/.bashrc`):
+
+```bash
+export OBSERVATORY_URL=https://your-deployment.convex.site
+export OBSERVATORY_API_KEY=obs_your_api_key
+```
+
+the CLI outputs JSON by default and pipes cleanly to `jq`.
+
 ---
 
 ## GET /api/v1/team
 
 team overview with rankings, impact scores, sparklines, and status.
 
-| param | type | default | description |
-|-------|------|---------|-------------|
+| param    | type                          | default | description                  |
+| -------- | ----------------------------- | ------- | ---------------------------- |
 | `period` | `today` \| `week` \| `month` | `today` | time window for the overview |
 
-```bash
-curl https://your-deployment.convex.site/api/v1/team?period=week \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark team
+  spark team --period week
+  spark team --period month
+  ```
 
-```json
+  ```bash curl
+  curl https://your-deployment.convex.site/api/v1/team?period=week \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "members": [
     {
@@ -52,19 +79,6 @@ curl https://your-deployment.convex.site/api/v1/team?period=week \
       "dailyImpacts": [210, 180, 340, 290, 0, 410, 412],
       "rank": 1,
       "prevRank": 1
-    },
-    {
-      "actor": "sam",
-      "displayName": "Sam Rivera",
-      "impact": 1423,
-      "delta": -12,
-      "sessions": 9,
-      "commits": 54,
-      "repos": ["frontend", "design-system"],
-      "status": "active",
-      "dailyImpacts": [190, 210, 280, 190, 0, 320, 233],
-      "rank": 2,
-      "prevRank": 2
     }
   ],
   "totalImpact": 3565,
@@ -78,16 +92,23 @@ curl https://your-deployment.convex.site/api/v1/team?period=week \
 
 individual activity profile. 30-day rolling window.
 
-| param | type | required | description |
-|-------|------|----------|-------------|
-| `actor` | string | yes | actor identifier |
+| param   | type   | required | description      |
+| ------- | ------ | -------- | ---------------- |
+| `actor` | string | yes      | actor identifier |
 
-```bash
-curl "https://your-deployment.convex.site/api/v1/person?actor=maya" \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark person maya
+  spark person sam
+  ```
 
-```json
+  ```bash curl
+  curl "https://your-deployment.convex.site/api/v1/person?actor=maya" \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "actor": "maya",
   "displayName": "Maya Chen",
@@ -134,22 +155,34 @@ curl "https://your-deployment.convex.site/api/v1/person?actor=maya" \
 
 filtered event stream. all params are optional — omit to get the full stream.
 
-| param | type | default | description |
-|-------|------|---------|-------------|
-| `actor` | string | — | filter by actor identifier |
-| `source` | string | — | filter by source tool (e.g. `github`, `slack`) |
-| `repo` | string | — | filter by repository name |
-| `type` | string | — | filter by event type (e.g. `push`, `pull_request`) |
-| `since` | ISO 8601 | — | return events after this timestamp |
-| `until` | ISO 8601 | — | return events before this timestamp |
-| `limit` | number | `50` | max results returned (max 200) |
+| param    | type     | default | description                                        |
+| -------- | -------- | ------- | -------------------------------------------------- |
+| `actor`  | string   | —       | filter by actor identifier                         |
+| `source` | string   | —       | filter by source tool (e.g. `github`, `slack`)     |
+| `repo`   | string   | —       | filter by repository name                          |
+| `type`   | string   | —       | filter by event type (e.g. `push`, `pull_request`) |
+| `since`  | ISO 8601 | —       | return events after this timestamp                 |
+| `until`  | ISO 8601 | —       | return events before this timestamp                |
+| `limit`  | number   | `50`    | max results returned (max 200)                     |
 
-```bash
-curl "https://your-deployment.convex.site/api/v1/events?actor=sam&source=github&limit=10" \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark events
+  spark events --actor sam
+  spark events --actor sam --since friday
+  spark events --source github --repo app-core
+  spark events --type pull_request --limit 20
+  ```
 
-```json
+  ```bash curl
+  curl "https://your-deployment.convex.site/api/v1/events?actor=sam&source=github&limit=10" \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+<Tip>the CLI accepts natural-language time shortcuts for `--since` and `--until`: `today`, `yesterday`, `monday`, `friday`.</Tip>
+
+```json response
 {
   "events": [
     {
@@ -178,17 +211,26 @@ curl "https://your-deployment.convex.site/api/v1/events?actor=sam&source=github&
 
 AI-generated synthesis for a time period. returns the narrative summary with key themes and highlights.
 
-| param | type | default | description |
-|-------|------|---------|-------------|
-| `date` | `YYYY-MM-DD` | today | target date for the summary |
-| `period` | `daily` \| `weekly` \| `monthly` | `daily` | synthesis window |
+| param    | type                              | default | description                 |
+| -------- | --------------------------------- | ------- | --------------------------- |
+| `date`   | `YYYY-MM-DD`                      | today   | target date for the summary |
+| `period` | `daily` \| `weekly` \| `monthly` | `daily` | synthesis window            |
 
-```bash
-curl "https://your-deployment.convex.site/api/v1/summary?date=2026-04-07&period=daily" \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark summary
+  spark summary --date 2026-04-07
+  spark summary --period weekly
+  spark summary --period monthly
+  ```
 
-```json
+  ```bash curl
+  curl "https://your-deployment.convex.site/api/v1/summary?date=2026-04-07&period=daily" \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "date": "2026-04-07",
   "period": "daily",
@@ -211,17 +253,26 @@ curl "https://your-deployment.convex.site/api/v1/summary?date=2026-04-07&period=
 
 goal progress with session mapping and completion tracking.
 
-| param | type | default | description |
-|-------|------|---------|-------------|
-| `status` | `active` \| `completed` \| `all` | `active` | filter by goal status |
-| `since` | ISO 8601 | — | only include sessions after this timestamp |
+| param    | type                              | default  | description                                |
+| -------- | --------------------------------- | -------- | ------------------------------------------ |
+| `status` | `active` \| `completed` \| `all` | `active` | filter by goal status                      |
+| `since`  | ISO 8601                          | —        | only include sessions after this timestamp |
 
-```bash
-curl "https://your-deployment.convex.site/api/v1/goals?status=active" \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark goals
+  spark goals --status active
+  spark goals --status completed
+  spark goals --since 2026-04-01
+  ```
 
-```json
+  ```bash curl
+  curl "https://your-deployment.convex.site/api/v1/goals?status=active" \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "goals": [
     {
@@ -233,16 +284,6 @@ curl "https://your-deployment.convex.site/api/v1/goals?status=active" \
       "totalImpact": 4120,
       "contributors": ["maya", "alex"],
       "lastActivityAt": "2026-04-07T14:00:00Z"
-    },
-    {
-      "id": "goal_7rx2c",
-      "title": "onboarding redesign",
-      "status": "active",
-      "progress": 0.31,
-      "sessions": 11,
-      "totalImpact": 1840,
-      "contributors": ["sam"],
-      "lastActivityAt": "2026-04-06T17:30:00Z"
     }
   ],
   "count": 2
@@ -253,19 +294,27 @@ curl "https://your-deployment.convex.site/api/v1/goals?status=active" \
 
 ## GET /api/v1/unmapped
 
-sessions not mapped to any goal. useful for identifying work that's happening outside your goal structure.
+sessions not mapped to any goal. useful for identifying work happening outside your goal structure.
 
-| param | type | default | description |
-|-------|------|---------|-------------|
+| param   | type     | default    | description                   |
+| ------- | -------- | ---------- | ----------------------------- |
 | `since` | ISO 8601 | 7 days ago | start of the window to search |
-| `limit` | number | `20` | max results returned |
+| `limit` | number   | `20`       | max results returned          |
 
-```bash
-curl "https://your-deployment.convex.site/api/v1/unmapped?since=2026-04-01T00:00:00Z" \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark unmapped
+  spark unmapped --since monday
+  spark unmapped --limit 50
+  ```
 
-```json
+  ```bash curl
+  curl "https://your-deployment.convex.site/api/v1/unmapped?since=2026-04-01T00:00:00Z" \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "sessions": [
     {
@@ -290,12 +339,18 @@ curl "https://your-deployment.convex.site/api/v1/unmapped?since=2026-04-01T00:00
 
 system health across all subsystems. useful for monitoring and alerting.
 
-```bash
-curl https://your-deployment.convex.site/api/v1/health \
-  -H "Authorization: Bearer obs_your_api_key"
-```
+<CodeGroup>
+  ```bash CLI
+  spark health
+  ```
 
-```json
+  ```bash curl
+  curl https://your-deployment.convex.site/api/v1/health \
+    -H "Authorization: Bearer obs_your_api_key"
+  ```
+</CodeGroup>
+
+```json response
 {
   "webhook": {
     "status": "healthy",
@@ -318,6 +373,32 @@ curl https://your-deployment.convex.site/api/v1/health \
 
 `overall` is `healthy` when all subsystems are healthy, `degraded` when one or more are behind, and `unhealthy` when a subsystem has stopped.
 
-<Card title="next: CLI" icon="arrow-right" href="/connect/cli">
-  command-line access to all seven endpoints.
+<Tip>the CLI exits with code 1 if any subsystem is unhealthy, making it suitable for monitoring scripts and CI checks.</Tip>
+
+---
+
+## pipe to jq
+
+all CLI output is valid JSON. a few useful patterns:
+
+<CodeGroup>
+  ```bash team rankings
+  spark team --period week | jq '.members[] | {actor, impact, status}'
+  ```
+
+  ```bash recent events
+  spark events --actor maya --limit 5 | jq '.events[] | {type, timestamp, payload.title}'
+  ```
+
+  ```bash health check
+  spark health | jq '.overall'
+  ```
+
+  ```bash unmapped work
+  spark unmapped --since monday | jq '.sessions[] | {actor, summary, impact}'
+  ```
+</CodeGroup>
+
+<Card title="next: MCP server" icon="arrow-right" href="/connect/mcp">
+  expose spark data as native tools for AI agents.
 </Card>

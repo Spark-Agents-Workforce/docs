@@ -44,6 +44,7 @@
             "group": "Two Streams",
             "pages": [
               "streams/activity",
+              "streams/sessions",
               "streams/knowledge"
             ]
           },
@@ -85,7 +86,7 @@
           },
           {
             "group": "Developer Reference",
-            "pages": ["connect/webhooks", "connect/api", "connect/cli", "connect/mcp"]
+            "pages": ["connect/webhooks", "connect/api", "connect/mcp"]
           }
         ]
       }

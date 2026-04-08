@@ -1,8 +1,11 @@
 ---
-title: 'what is spark'
-description: 'what spark is and how it works — two streams, agents, and an AI to talk to.'
-icon: 'zap'
+title: what is spark
+description: what spark is and how it works — two streams, agents, and an AI to talk to.
 ---
+
+# what is spark
+
+> what spark is and how it works — two streams, agents, and an AI to talk to.
 
 spark is an AI-powered intelligence platform for teams.
 
@@ -18,12 +21,31 @@ everything in spark starts with data flowing in.
   <Card title="the activity stream" icon="activity" href="/streams/activity">
     connect your tools. events flow in automatically. they naturally group into **sessions** — scored units of work. "maya worked on the notification system for 2h15m across 14 commits."
   </Card>
+
   <Card title="the knowledge stream" icon="book-open" href="/streams/knowledge">
     drop in what you know. research papers, tutorials, competitive intel, meeting notes. each one is a **knowledge unit** that the system reads, extracts, and synthesizes into a living wiki.
   </Card>
 </CardGroup>
 
 two streams. one is automatic (your tools generate it). one is intentional (you feed it). both compound over time.
+
+## sessions
+
+sessions are the core unit of the product. the activity stream groups your team's events into meaningful chunks of work — who did what, for how long, across which repos. every session gets an AI-generated summary, an impact score, and connects to goals, people, and spark AI queries.
+
+<Card title="deep dive: sessions" icon="layers" href="/streams/sessions">
+  how events become scored, meaningful units of work — the atomic unit of everything in spark.
+</Card>
+
+## connecting your data
+
+spark watches your tools. the more you connect, the richer the intelligence.
+
+start with github. add slack for context beyond code. layer in your task tracker. each tool adds a new dimension to sessions and scoring. native integrations, custom webhooks, API, CLI, and MCP server — five ways to connect.
+
+<Card title="connect your tools" icon="plug" href="/connect/overview">
+  integrations, webhooks, API, CLI, and MCP server reference.
+</Card>
 
 ## agents
 
@@ -35,9 +57,11 @@ every agent is built from three capabilities:
   <Step title="watch" icon="radio">
     monitor a stream for specific events or patterns.
   </Step>
+
   <Step title="evaluate" icon="scan">
     AI decides what it means, scores confidence.
   </Step>
+
   <Step title="act" icon="zap">
     take an action — score it, alert someone, create a page, route a message.
   </Step>
@@ -47,13 +71,14 @@ some agents use all three. some just watch and evaluate. all are toggleable. tur
 
 <Tabs>
   <Tab title="on by default">
-    - **impact scorer** — watches sessions, evaluates impact across output/importance/quality, assigns scores
-    - **synthesis generator** — watches session accumulation, generates daily and weekly narrative summaries
-    - **signal puller** — watches external tools for non-code events (tasks, messages, tickets)
-    - **knowledge ingest** — watches for new knowledge sources, extracts entities, synthesizes wiki pages
+    * **impact scorer** — watches sessions, evaluates impact across output/importance/quality, assigns scores
+    * **synthesis generator** — watches session accumulation, generates daily and weekly narrative summaries
+    * **signal puller** — watches external tools for non-code events (tasks, messages, tickets)
+    * **knowledge ingest** — watches for new knowledge sources, extracts entities, synthesizes wiki pages
   </Tab>
+
   <Tab title="available to enable">
-    - PR quality monitor, slack urgency detector, deploy watcher, shopify health monitor, knowledge lint, and more
+    * PR quality monitor, slack urgency detector, deploy watcher, shopify health monitor, knowledge lint, and more
   </Tab>
 </Tabs>
 
@@ -61,7 +86,7 @@ some agents use all three. some just watch and evaluate. all are toggleable. tur
   see the full agent framework and fleet management view.
 </Card>
 
-## spark
+## spark AI
 
 spark is the AI you talk to. it sits on top of everything — both streams, everything the agents produce. ask anything.
 
@@ -76,17 +101,18 @@ answers come back as rich widgets. charts, tables, leaderboards, timelines. conv
 ## the product in one sentence
 
 <Note>
-two data streams flow in. a fleet of AI agents watches and processes them. you talk to an AI that sees it all.
+  two data streams flow in. a fleet of AI agents watches and processes them. you talk to an AI that sees it all.
 </Note>
 
 ## who spark is for
 
-teams that work with AI agents, automated pipelines, and complex toolchains. engineering teams. devops. AI-native startups. any team where work moves faster than humans can track.
+teams where work moves faster than humans can track. engineering teams, devops, AI-native startups. any team using connected tools that generate more signal than anyone can manually process.
 
 <Tabs>
   <Tab title="single player">
     use it for your own work, your own research, your own knowledge base.
   </Tab>
+
   <Tab title="team player">
     org account, everyone feeds the same streams, agents watch for everyone, the knowledge base compounds from every team member's contributions.
   </Tab>
