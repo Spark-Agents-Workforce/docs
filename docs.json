@@ -51,7 +51,9 @@
             "group": "Agents",
             "pages": [
               "agents/overview",
-              "agents/impact-scorer"
+              "agents/impact-scorer",
+              "agents/built-in",
+              "agents/available"
             ]
           },
           {

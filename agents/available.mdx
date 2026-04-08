@@ -1,0 +1,84 @@
+---
+title: 'available agents'
+description: 'the agents you can enable — each one adds a new layer of intelligence.'
+icon: 'plus-circle'
+---
+
+beyond the built-in agents, spark has a growing catalog of agents you can enable. each one adds a specific intelligence layer. toggle on what matters, ignore what doesn't.
+
+## PR quality monitor
+
+**watch + evaluate + act**
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | every pull request merged across your connected repos |
+| **evaluate** | checks for risk patterns — PRs merged without review, large PRs with no tests, force merges to main |
+| **act** | flags risky merges, surfaces them in the activity feed, optionally notifies the team |
+
+catches the merges that slip through when the team is moving fast.
+
+## slack urgency detector
+
+**watch + evaluate + act**
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | messages in your connected slack channels |
+| **evaluate** | classifies tone, keywords, and escalation patterns — distinguishes routine chatter from "production is down" energy |
+| **act** | classifies urgency level, routes to the right person, surfaces in the activity feed |
+
+useful for teams where slack is where fires get reported but nobody's monitoring every channel.
+
+## deploy watcher
+
+**watch + evaluate + act**
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | deployment events from vercel, convex, or your CI/CD pipeline |
+| **evaluate** | correlates deploy timing with subsequent error rates, performance regressions, or incident signals |
+| **act** | alerts when a deploy correlates with problems, surfaces the connection so you can roll back fast |
+
+<Note>answers the question "did this deploy break something?" before a customer notices.</Note>
+
+## shopify health monitor
+
+**watch + evaluate + act**
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | order flow, inventory changes, app events, checkout patterns |
+| **evaluate** | detects anomalies — sudden order drops, refund spikes, checkout errors, inventory mismatches |
+| **act** | alerts on anomalies, surfaces trends in the feed |
+
+for teams running shopify stores alongside their product work.
+
+## knowledge ingest
+
+**watch + evaluate + act**
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | new sources arriving in the knowledge stream |
+| **evaluate** | reads the source, extracts entities, concepts, claims, and relationships |
+| **act** | creates and updates wiki pages, builds cross-references, adds source attributions |
+
+<Tip>this is the engine behind the knowledge layer. one source can touch 10-15 wiki pages. on by default because knowledge without ingestion is just a pile of documents.</Tip>
+
+## knowledge lint
+
+**watch + evaluate** (no external action)
+
+| capability | what it does |
+|-----------|-------------|
+| **watch** | the state of your knowledge base over time — page ages, reference patterns, source coverage |
+| **evaluate** | identifies contradictions, stale pages, orphans, gaps, and unsourced claims |
+
+runs periodically. surfaces findings on the knowledge health dashboard with severity ratings and suggested fixes. the AI can auto-resolve many issues and flags the rest for human review.
+
+<Warning>off by default. enable when your knowledge base has enough pages that maintenance matters.</Warning>
+
+## building your own
+
+the agent framework is extensible. each agent is a combination of watch + evaluate + act capabilities pointed at a specific stream or pattern. as spark grows, more agents become available.

@@ -1,0 +1,61 @@
+---
+title: 'built-in agents'
+description: 'the agents that ship on by default — synthesis generator, signal puller.'
+icon: 'cpu'
+---
+
+these agents ship on by default alongside the impact scorer. they run quietly in the background, processing your streams into intelligence without any configuration.
+
+## synthesis generator
+
+**watch + evaluate + act**
+
+<Steps>
+  <Step title="watch" icon="radio">
+    monitors session accumulation over time.
+  </Step>
+  <Step title="evaluate" icon="scan">
+    identifies patterns, highlights, and notable work across the team.
+  </Step>
+  <Step title="act" icon="zap">
+    writes narrative summaries and publishes them.
+  </Step>
+</Steps>
+
+the synthesis generator runs on a schedule: daily, weekly, and monthly.
+
+<AccordionGroup>
+  <Accordion title="daily synthesis">
+    "today the team shipped 4 features, merged 12 PRs. highest-impact work was kevin's payment refactor at 312 points. dominic continued the boost split testing (3h20m, on track). no deploys failed."
+  </Accordion>
+  <Accordion title="weekly synthesis">
+    broader patterns. who worked on what. how goals progressed. what's trending up or down. work type distribution across the team.
+  </Accordion>
+  <Accordion title="monthly synthesis">
+    the big picture. velocity trends, goal completion rates, team capacity shifts, the work that mattered most.
+  </Accordion>
+</AccordionGroup>
+
+<Note>these aren't just status reports. the AI reads every session, every score, every signal and tells you what the numbers mean in plain language. no human has to compile this.</Note>
+
+## signal puller
+
+**watch + evaluate + act**
+
+<Steps>
+  <Step title="watch" icon="radio">
+    monitors external tools for events that aren't code — asana task updates, slack activity, linear issues, shopify orders.
+  </Step>
+  <Step title="evaluate" icon="scan">
+    classifies each signal's significance: routine, notable, or urgent.
+  </Step>
+  <Step title="act" icon="zap">
+    stores signals in observatory, linking them to relevant actors and projects.
+  </Step>
+</Steps>
+
+code events flow in through the activity stream automatically. but not all work generates code. a designer moving asana tasks, a founder handling slack support threads, a PM updating linear tickets.
+
+the signal puller bridges that gap. it pulls in non-code activity so that when you ask "what did devin do this week?" the answer includes their design tasks and slack discussions, not just commits.
+
+<Tip>signals also enrich session scoring. the impact scorer sees that a coding session happened right after an urgent slack thread. that context changes the importance score.</Tip>
