@@ -26,7 +26,7 @@ the system watches the event stream and groups related events automatically usin
 you don't configure this. it happens automatically. the system learns your team's working patterns over time — what a typical session looks like for a deep-focus backend engineer vs. a PM who touches six things in an hour.
 
 <Note>
-  session boundaries are soft, not rigid. the system uses a probabilistic model, not hard time windows. two commits 90 minutes apart might be the same session (lunch break) or different sessions (context switch). the AI uses the content of the events, not just timestamps, to decide.
+  session boundaries are soft, not rigid. two commits 90 minutes apart might be the same session (lunch break) or different sessions (context switch). the AI uses the content of the events — not just timestamps — to decide.
 </Note>
 
 ## what a session contains
@@ -86,6 +86,20 @@ every score comes with written reasoning — the AI explains what it saw and why
     what logically follows this work. "the PR is open and needs review. test coverage for edge cases could be expanded. the rate limiting config should be documented."
   </Accordion>
 </AccordionGroup>
+
+## session types
+
+not all work looks the same. the AI identifies what kind of work a session represents:
+
+| type               | what it looks like                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| **deep work**      | long focused sessions with high commit density — building features, writing systems    |
+| **review work**    | PR reviews, code review, feedback loops                                                |
+| **coordination**   | slack-heavy sessions with task management — meetings, planning, unblocking others       |
+| **firefighting**   | rapid response to incidents or bugs — short, intense, high-stakes                      |
+| **exploration**    | research, prototyping, investigation — learning before building                        |
+
+the AI factors session type into scoring. a 30-minute firefighting session that saves production is scored differently than a 30-minute slack conversation.
 
 ## sessions connect to everything
 
