@@ -1,0 +1,110 @@
+---
+title: 'the activity stream'
+description: 'how events flow in from your tools and naturally form into sessions.'
+icon: 'activity'
+---
+
+the activity stream is one of two inputs to spark. you connect your tools, events flow in, and they naturally group into sessions. one continuous stream — raw events at the bottom, scored work sessions at the top.
+
+## events
+
+every meaningful action across your team's tools becomes an event. a commit. a PR. a deploy. a slack message. an asana task moving to "done."
+
+each event has an **actor** (who), a **source** (where), a **timestamp** (when), and a **payload** (what).
+
+<CardGroup cols={3}>
+  <Card title="github" icon="git-branch">
+    commits, pull requests, reviews, CI runs, releases
+  </Card>
+  <Card title="slack" icon="hash">
+    messages, threads, reactions
+  </Card>
+  <Card title="asana" icon="check-square">
+    task creation, completion, movement
+  </Card>
+  <Card title="linear" icon="triangle">
+    issues, cycles, project updates
+  </Card>
+  <Card title="shopify" icon="shopping-bag">
+    orders, inventory, app events
+  </Card>
+  <Card title="custom" icon="plug">
+    webhook endpoints for anything else
+  </Card>
+</CardGroup>
+
+<Tip>no batch import. real-time.</Tip>
+
+## sessions
+
+events are raw. sessions are meaningful.
+
+spark watches the event stream and groups related events into sessions automatically. a cluster of commits to the same repo by the same person within a time window becomes one session:
+
+<Note>
+"dominic worked on the boost split testing feature for 3h20m. 22 commits, 1 PR merged, 3 asana tasks completed."
+</Note>
+
+this isn't a separate processing step. it's just what the stream does at higher resolution. the same way you can look at individual waves or see the tide.
+
+## scoring
+
+every session gets evaluated by the **impact scorer** agent. it reads the events, analyzes what changed, and scores the session:
+
+<CardGroup cols={2}>
+  <Card title="impact points" icon="zap">
+    the headline number — overall value created.
+  </Card>
+  <Card title="output" icon="gauge">
+    how much was produced.
+  </Card>
+  <Card title="importance" icon="star">
+    how strategically significant.
+  </Card>
+  <Card title="quality" icon="gem">
+    how well it was done.
+  </Card>
+</CardGroup>
+
+<Tip>scores come with reasoning. the AI explains why it scored the way it did. you can see the logic, disagree, and give feedback that improves future scoring.</Tip>
+
+## session detail
+
+click into any session and you see:
+
+<AccordionGroup>
+  <Accordion title="AI summary">
+    narrative of what happened. "dominic implemented A/B testing for the pricing page."
+  </Accordion>
+  <Accordion title="events">
+    the raw activities in order.
+  </Accordion>
+  <Accordion title="repos & duration">
+    which codebases were touched, how long.
+  </Accordion>
+  <Accordion title="skills">
+    domain areas — frontend, backend, testing, infrastructure.
+  </Accordion>
+  <Accordion title="decisions & risks">
+    key choices the AI identified, potential issues flagged.
+  </Accordion>
+  <Accordion title="suggested next steps">
+    what logically comes after this work.
+  </Accordion>
+</AccordionGroup>
+
+## sessions for AI agents
+
+<Warning>
+when your AI agents work — codex writing code, claude reviewing PRs, custom agents running pipelines — their activity creates sessions too. same stream, same scoring, same visibility.
+</Warning>
+
+"what did our agents accomplish today?" is answered the same way as "what did kevin accomplish today?"
+
+## the feed
+
+the activity feed is your view into the stream. a chronological timeline of everything, filterable by actor, source, repo, time, and event type. at event resolution or session resolution. your choice.
+
+<Card title="next: the knowledge stream" icon="arrow-right" href="/streams/knowledge">
+  the other input — what your team knows.
+</Card>

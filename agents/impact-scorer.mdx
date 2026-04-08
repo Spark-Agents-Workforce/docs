@@ -1,0 +1,64 @@
+---
+title: 'impact scorer'
+description: 'the agent that scores every session — how it works, what it measures, why it matters.'
+icon: 'gauge'
+---
+
+the impact scorer is the first agent most users see in action. it's on by default. every time a session forms in your activity stream, the impact scorer evaluates it.
+
+## watch + evaluate
+
+the impact scorer uses two capabilities:
+
+<Steps>
+  <Step title="watch" icon="radio">
+    monitors the session stream. every time a new session is detected (a cluster of activity by one person), the impact scorer picks it up.
+  </Step>
+  <Step title="evaluate" icon="scan">
+    reads the events, analyzes the code changes, checks the repos, considers the goals, and produces a score with reasoning.
+  </Step>
+</Steps>
+
+it doesn't act in the external sense. it doesn't send alerts or create pages. it scores. the score lives on the session and shows up across the product: dashboards, leaderboards, person profiles, spark queries.
+
+## what it measures
+
+every session is scored on three dimensions:
+
+<CardGroup cols={3}>
+  <Card title="output" icon="gauge">
+    how much was produced. commits, files changed, PRs opened/merged, tasks completed. the scorer adjusts for noise like auto-generated files and dependency updates.
+  </Card>
+  <Card title="importance" icon="star">
+    how strategically significant. work tied to team goals scores higher. shipping a feature that unblocks others scores higher than routine maintenance.
+  </Card>
+  <Card title="quality" icon="gem">
+    how well the work was done. clear commit messages vs empty ones. focused scope vs scattered changes. PR descriptions vs blind merges.
+  </Card>
+</CardGroup>
+
+## impact points
+
+the three dimensions combine into a single **impact points** score. the headline number. this powers the leaderboard, the team overview, and spark's analytical queries.
+
+<Note>
+impact points aren't arbitrary. the formula weights importance highest, because strategic work that moves the team forward matters more than high-volume busywork. a single well-scoped PR that ships a feature will outscore ten low-value commits.
+</Note>
+
+## reasoning
+
+every score comes with a written explanation. the AI explains its thinking: what it saw in the events, how it interpreted the work, why it assigned the scores it did.
+
+this isn't a black box. you can read the reasoning, see if it makes sense, and understand why kevin's checkout refactor scored 312 while a dependency update scored 8.
+
+## feedback loop
+
+disagree with a score? correct it. the feedback gets recorded — your original scores, the corrected scores, and your reason for the change. over time, this feedback trains the scorer to better understand what your team values.
+
+<Tip>the system learns what "important" means to you specifically. different teams have different definitions of impact. the scorer adapts.</Tip>
+
+## AI agents get scored too
+
+<Warning>
+when AI agents generate sessions (codex writing features, claude reviewing code) the impact scorer evaluates them with the same framework. human and AI work measured on the same scale.
+</Warning>

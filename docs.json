@@ -41,10 +41,17 @@
             ]
           },
           {
-            "group": "Observatory",
+            "group": "Two Streams",
             "pages": [
-              "observatory/activities",
-              "observatory/sessions"
+              "streams/activity",
+              "streams/knowledge"
+            ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "agents/overview",
+              "agents/impact-scorer"
             ]
           },
           {
@@ -52,23 +59,11 @@
             "pages": [
               "spark/ask-anything"
             ]
-          },
-          {
-            "group": "Agents",
-            "pages": [
-              "agents/overview"
-            ]
-          },
-          {
-            "group": "Knowledge",
-            "pages": [
-              "knowledge/overview"
-            ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Developers",
         "groups": [
           {
             "group": "API documentation",

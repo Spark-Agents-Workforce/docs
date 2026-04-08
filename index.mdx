@@ -1,64 +1,93 @@
 ---
 title: 'what is spark'
-description: 'what spark is, who it''s for, and how the four pillars work together.'
+description: 'what spark is and how it works — two streams, agents, and an AI to talk to.'
 icon: 'zap'
 ---
 
-spark is an intelligence platform for teams that work with AI agents.
+spark is an AI-powered intelligence platform for teams.
 
-your team generates a mountain of signal every day. commits, PRs, deploys, slack messages, asana tickets, agent sessions. none of it connects. it sits in silos. nobody synthesizes it. ask "what happened this week?" and someone has to manually stitch it together from five different tools.
+you plug in your tools. two data streams start flowing. you choose which AI agents run on top of those streams. and you get an AI you can talk to that sees everything.
 
-spark fixes that. it ingests your team's work, scores it, lets you ask questions about it, and builds a compounding knowledge base that gets smarter every day.
+that's the whole product.
 
-## the four pillars
+## two streams
 
-spark is built on four connected layers. each one builds on the one before it.
+everything in spark starts with data flowing in.
 
 <CardGroup cols={2}>
-  <Card title="observatory" icon="activity" href="/observatory/activities">
-    the data. connect your tools, watch activity stream in, see it grouped into scored sessions. **what happened?**
+  <Card title="the activity stream" icon="activity" href="/streams/activity">
+    connect your tools. events flow in automatically. they naturally group into **sessions** — scored units of work. "kevin worked on the checkout refactor for 2h15m across 14 commits."
   </Card>
-  <Card title="spark" icon="message-circle" href="/spark/ask-anything">
-    the AI you talk to. ask anything about your team in natural language. get rich widgets back. **what does it mean?**
-  </Card>
-  <Card title="agents" icon="eye" href="/agents/overview">
-    the watchers. reactive AI that monitors your streams and acts automatically. watch → evaluate → act. **what should i pay attention to?**
-  </Card>
-  <Card title="knowledge" icon="brain" href="/knowledge/overview">
-    the brain. a compounding knowledge base that gets smarter every day from your work and your research. **what do we know, and what are we missing?**
+  <Card title="the knowledge stream" icon="book-open" href="/streams/knowledge">
+    drop in what you know. research papers, tutorials, competitive intel, meeting notes. each one is a **knowledge unit** that the system reads, extracts, and synthesizes into a living wiki.
   </Card>
 </CardGroup>
 
-## the arc
+two streams. one is automatic (your tools generate it). one is intentional (you feed it). both compound over time.
 
-each pillar raises the stakes.
+## agents
+
+agents are AI watchers that process your streams. they're the intelligence layer.
+
+every agent is built from three capabilities:
 
 <Steps>
-  <Step title="observatory is useful" icon="activity">
-    "i can see everything."
+  <Step title="watch" icon="radio">
+    monitor a stream for specific events or patterns.
   </Step>
-  <Step title="spark is powerful" icon="zap">
-    "i can just ask."
+  <Step title="evaluate" icon="scan">
+    AI decides what it means, scores confidence.
   </Step>
-  <Step title="agents are magic" icon="sparkles">
-    "it does that automatically?"
-  </Step>
-  <Step title="knowledge is transformative" icon="lightbulb">
-    "this changes everything."
+  <Step title="act" icon="zap">
+    take an action — score it, alert someone, create a page, route a message.
   </Step>
 </Steps>
 
+some agents use all three. some just watch and evaluate. all are toggleable. turn on what matters, turn off what's noise.
+
+<Tabs>
+  <Tab title="on by default">
+    - **impact scorer** — watches sessions, evaluates impact across output/importance/quality, assigns scores
+    - **synthesis generator** — watches session accumulation, generates daily and weekly narrative summaries
+    - **signal puller** — watches external tools for non-code events (tasks, messages, tickets)
+    - **knowledge ingest** — watches for new knowledge sources, extracts entities, synthesizes wiki pages
+  </Tab>
+  <Tab title="available to enable">
+    - PR quality monitor, slack urgency detector, deploy watcher, shopify health monitor, knowledge lint, and more
+  </Tab>
+</Tabs>
+
+<Card title="explore agents" icon="eye" href="/agents/overview">
+  see the full agent framework and fleet management view.
+</Card>
+
+## spark
+
+spark is the AI you talk to. it sits on top of everything — both streams, everything the agents produce. ask anything.
+
+"how's the team doing this week?" · "what do we know about react performance?" · "compare Q1 output to Q2." · "what shipped yesterday?"
+
+answers come back as rich widgets. charts, tables, leaderboards, timelines. conversations are persistent threads. insights can be saved back into the knowledge stream where they compound with everything else.
+
+<Card title="explore spark AI" icon="message-circle" href="/spark/ask-anything">
+  learn about widgets, threads, and tools.
+</Card>
+
+## the product in one sentence
+
+<Note>
+two data streams flow in. a fleet of AI agents watches and processes them. you talk to an AI that sees it all.
+</Note>
+
 ## who spark is for
 
-spark is for teams that work with AI agents, automated pipelines, and complex toolchains. teams that want to actually understand what's happening across all of it.
-
-engineering teams. devops. AI-native startups. any team where work moves faster than humans can track it.
+teams that work with AI agents, automated pipelines, and complex toolchains. engineering teams. devops. AI-native startups. any team where work moves faster than humans can track.
 
 <Tabs>
   <Tab title="single player">
-    use spark for your own work. your own research. your own knowledge base. a personal intelligence engine.
+    use it for your own work, your own research, your own knowledge base.
   </Tab>
   <Tab title="team player">
-    get an org account. everyone feeds the same brain. the engineer's deep dives connect to the designer's research connect to the founder's market analysis. institutional memory builds itself.
+    org account, everyone feeds the same streams, agents watch for everyone, the knowledge base compounds from every team member's contributions.
   </Tab>
 </Tabs>
