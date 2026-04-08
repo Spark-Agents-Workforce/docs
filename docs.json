@@ -44,7 +44,7 @@
             "group": "Two Streams",
             "pages": [
               "streams/activity",
-              "streams/knowledge"
+              "knowledge/overview"
             ]
           },
           {
@@ -58,6 +58,12 @@
             ]
           },
           {
+            "group": "Spark AI",
+            "pages": [
+              "spark/ask-anything"
+            ]
+          },
+          {
             "group": "Knowledge",
             "pages": [
               "knowledge/overview",
@@ -66,12 +72,6 @@
               "knowledge/graph",
               "knowledge/health",
               "knowledge/enrichment"
-            ]
-          },
-          {
-            "group": "Spark AI",
-            "pages": [
-              "spark/ask-anything"
             ]
           }
         ]
