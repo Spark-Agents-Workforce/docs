@@ -46,6 +46,24 @@
               "observatory/activities",
               "observatory/sessions"
             ]
+          },
+          {
+            "group": "Spark AI",
+            "pages": [
+              "spark/ask-anything"
+            ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "agents/overview"
+            ]
+          },
+          {
+            "group": "Knowledge",
+            "pages": [
+              "knowledge/overview"
+            ]
           }
         ]
       },

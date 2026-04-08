@@ -1,0 +1,100 @@
+---
+title: 'spark AI'
+description: 'your AI analyst that queries across all your data and surfaces insights.'
+icon: 'message-circle'
+---
+
+spark is the AI you talk to. it sits on top of everything. your activities, sessions, scores, knowledge base. ask anything in natural language.
+
+no dashboards to configure. no queries to write. no filters to fiddle with. just ask.
+
+## ask anything
+
+spark understands your team's data because it has direct access to every table in your observatory. it can read sessions, events, scores, signals, goals, team members, and your knowledge base.
+
+<Tabs>
+  <Tab title="team overview">
+    - "how's the team doing this week?"
+    - "who's been the most productive this month?"
+    - "what shipped yesterday?"
+  </Tab>
+  <Tab title="individual deep dives">
+    - "show me everything kevin worked on in the last 7 days."
+    - "what's dominic's average impact score this quarter vs last?"
+    - "has anyone been working on the auth migration?"
+  </Tab>
+  <Tab title="strategic questions">
+    - "compare frontend vs backend output this month."
+    - "what work has the highest impact but lowest completion rate?"
+    - "which repos have the most activity but no sessions scored above 100?"
+  </Tab>
+  <Tab title="cross-referencing">
+    - "are there any sessions related to what our knowledge base says about react performance?"
+    - "show me all deploys that happened within an hour of a high-urgency slack message."
+  </Tab>
+</Tabs>
+
+<Tip>spark doesn't just return data. it interprets it. it tells you what the numbers mean, what patterns it sees, and what you might want to pay attention to.</Tip>
+
+## widgets
+
+answers come back as rich, interactive widgets. not walls of text.
+
+<CardGroup cols={3}>
+  <Card title="charts" icon="bar-chart-2">
+    bar charts, line charts, pie charts — comparing metrics across people, repos, or time periods.
+  </Card>
+  <Card title="tables" icon="table">
+    structured data with sortable columns.
+  </Card>
+  <Card title="stat cards" icon="hash">
+    single headline numbers with context. "142 impact points, +23% vs last week."
+  </Card>
+  <Card title="leaderboards" icon="trophy">
+    ranked lists — top contributors, most impactful sessions.
+  </Card>
+  <Card title="session lists" icon="list">
+    browseable lists of sessions matching your query.
+  </Card>
+  <Card title="person profiles" icon="user">
+    holistic view of one team member's activity and scores.
+  </Card>
+  <Card title="goal trackers" icon="target">
+    progress against team goals.
+  </Card>
+  <Card title="timelines" icon="clock">
+    chronological event views.
+  </Card>
+</CardGroup>
+
+widgets render inline in the conversation. you see the data visualized immediately. no separate dashboard tab, no export-and-chart workflow.
+
+## threads
+
+conversations with spark are persistent threads. you can:
+
+- **continue a conversation** — come back to a thread and pick up where you left off
+- **build iteratively** — "show me this week's sessions." → "now filter to just kevin." → "compare that to last week." → "make that a bar chart."
+- **save insights** — pin important findings so your team can see them
+- **file to knowledge** — when spark surfaces something worth remembering, push the answer into your knowledge base where it compounds with everything else
+
+<Note>threads aren't throwaway chat. they're working sessions where analysis happens. the conversation IS the analytical tool.</Note>
+
+## tools
+
+under the hood, spark has a toolkit of specialized operations:
+
+| tool | what it does |
+|------|-------------|
+| **search knowledge** | semantic search across your wiki pages |
+| **get page** | read any knowledge page in full |
+| **add knowledge** | file new insights into the wiki |
+| **query tables** | run structured queries across any observatory table |
+| **time series** | generate trend data over custom periods |
+| **live sessions** | check what's happening right now |
+
+when you ask a complex question, spark chains multiple tools together. searching knowledge, querying sessions, comparing time periods. then synthesizes the results into a coherent answer.
+
+<Card title="next: agents" icon="arrow-right" href="/agents/overview">
+  learn about the AI watchers that work for you automatically.
+</Card>

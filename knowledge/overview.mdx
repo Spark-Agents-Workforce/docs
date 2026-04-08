@@ -1,0 +1,159 @@
+---
+title: 'knowledge'
+description: 'a compounding knowledge base that gets smarter every day.'
+icon: 'brain'
+---
+
+knowledge is the capstone of spark. everything else — observatory, spark AI, agents — is about what's happening now. knowledge is about what your team *knows* and making that knowledge compound over time.
+
+most teams' knowledge is scattered. docs rot in notion. meeting notes disappear into slack threads. research sits in someone's head. competitive intel lives in a google doc nobody updates.
+
+spark's knowledge layer changes this. it's a living, AI-maintained wiki that synthesizes everything you feed it into cross-referenced, searchable, enriched intelligence that gets richer every day.
+
+## knowledge units
+
+everything in the knowledge layer starts as a **knowledge unit** — the smallest atom of knowledge. a source document plus what was learned from it.
+
+<CardGroup cols={2}>
+  <Card title="a URL" icon="link">
+    paste a link and spark fetches, reads, and extracts what matters.
+  </Card>
+  <Card title="a document" icon="file-text">
+    upload a PDF, a markdown file, meeting notes, a research paper.
+  </Card>
+  <Card title="a note" icon="pen-line">
+    type or paste raw text, observations, ideas.
+  </Card>
+  <Card title="a session" icon="layers">
+    any observatory session can become a knowledge unit. your team's work feeds the brain automatically.
+  </Card>
+</CardGroup>
+
+you create the unit. spark does everything else.
+
+## how ingestion works
+
+when you drop a knowledge unit into spark, the AI runs a multi-step pipeline:
+
+<Steps>
+  <Step title="extract" icon="scan">
+    reads the source, identifies entities (people, tools, concepts, projects), claims (assertions and facts), and relationships.
+  </Step>
+  <Step title="synthesize" icon="combine">
+    creates new wiki pages or updates existing ones. if you drop in a paper about react performance and you already have a "react" page, the AI integrates the new information. the page gets smarter, not just longer.
+  </Step>
+  <Step title="cross-reference" icon="git-compare">
+    scans for connections. does this relate to other pages? contradict anything? strengthen an existing claim? creates typed links: mentions, depends on, contradicts, supersedes, part of, related to.
+  </Step>
+  <Step title="attribute" icon="bookmark">
+    every claim on every page links back to its source. you can always trace "where did this come from?" citations aren't decorative — they're how you trust synthesized knowledge.
+  </Step>
+</Steps>
+
+<Tip>one source might touch 10-15 wiki pages. the whole knowledge base shifts with every ingestion.</Tip>
+
+## pages
+
+pages are the synthesized output. the wiki that the AI builds and maintains. you never (or rarely) write pages yourself. the AI writes them. you feed sources and ask questions.
+
+**page types:**
+
+| type | what it covers |
+|------|---------------|
+| **entity pages** | people, tools, companies, products. "react," "kevin," "stripe," "competitor X." |
+| **concept pages** | ideas, patterns, methodologies. "microservices," "A/B testing," "event-driven architecture." |
+| **project pages** | specific initiatives. "auth migration," "Q2 launch," "knowledge layer build." |
+| **pattern pages** | recurring patterns across your data. |
+| **decision pages** | choices made and their reasoning. "we chose convex over supabase because..." |
+| **question pages** | open questions that need investigation. auto-generated when the AI identifies gaps. |
+
+every page has:
+- **content** — AI-written markdown, synthesized from all contributing sources
+- **citations** — hover over any claim to see which source it came from
+- **backlinks** — what other pages reference this one
+- **tags** — for discovery and filtering
+- **confidence score** — many sources = high confidence, one source = lower
+- **version history** — see how the page evolved over time as new sources came in
+
+## compounding
+
+this is the key insight. the knowledge base doesn't just accumulate. it **compounds**.
+
+<Steps>
+  <Step title="week 1">
+    20 pages with a few cross-references. useful but sparse.
+  </Step>
+  <Step title="month 3">
+    200 pages with hundreds of cross-references. patterns emerge that no single source contained. contradictions flagged and resolved.
+  </Step>
+  <Step title="month 6">
+    an organizational brain that knows more about your domain than any single person on the team. new hires ask it questions and get synthesized answers with citations.
+  </Step>
+</Steps>
+
+<Note>this compounding effect is what separates spark's knowledge layer from static docs, RAG-based chat, or manual wikis. it gets smarter whether you're actively using it or not, because every new source strengthens the whole graph.</Note>
+
+## enrichment
+
+the AI doesn't just organize what you give it. it goes and **gets** intelligence you don't have yet.
+
+**how it works:**
+1. the AI analyzes your knowledge graph and identifies gaps
+2. it searches the **live web** — not training data from months ago, current information
+3. it synthesizes what it finds into your wiki with full source attribution
+4. it cross-references external findings against what you already know
+
+**what it checks for:**
+
+<CardGroup cols={2}>
+  <Card title="competitor changes" icon="radar">
+    relevant to your domain
+  </Card>
+  <Card title="API updates" icon="refresh-cw">
+    that affect your stack
+  </Card>
+  <Card title="new research" icon="book-open">
+    related to your topics
+  </Card>
+  <Card title="reality checks" icon="check-circle">
+    whether existing pages still reflect current reality
+  </Card>
+</CardGroup>
+
+<Warning>this is the difference between a knowledge base and an intelligence platform. the AI is an analyst with a research budget, not just a librarian organizing your files.</Warning>
+
+## the bridge: observatory ↔ knowledge
+
+observatory and knowledge are connected. data flows both ways.
+
+| direction | what happens |
+|-----------|-------------|
+| **sessions → knowledge** | your team's work sessions become knowledge sources. key decisions, discovered patterns, solved problems feed the brain. |
+| **knowledge → sessions** | when you view a session, spark shows related knowledge pages. your team's accumulated knowledge contextualizes their current work. |
+| **agents → knowledge** | the knowledge ingest and lint agents watch for new sources, evaluate them, and act by synthesizing pages. same watch → evaluate → act pattern. |
+| **knowledge → spark** | when you ask spark a question, it searches your knowledge base first. answers reflect everything your team has learned. |
+
+## health
+
+knowledge bases can degrade if nobody maintains them. the knowledge health dashboard tracks:
+
+| issue | what it means |
+|-------|-------------|
+| **contradictions** | pages that conflict with each other |
+| **stale pages** | pages not updated despite newer information |
+| **orphans** | pages with no inbound links |
+| **gaps** | concepts referenced but lacking their own page |
+| **low-confidence** | pages sourced from a single document |
+| **unsourced claims** | assertions without citation |
+
+<Tip>the lint agent runs these checks automatically. when it finds issues, they surface on the health dashboard with severity ratings and suggested fixes. the AI can fix many of them itself.</Tip>
+
+## why this works
+
+humans abandon wikis because the maintenance burden grows faster than the value. nobody wants to update cross-references, check for contradictions, keep summaries current, and make sure new information is properly filed across dozens of pages.
+
+the AI doesn't get bored. it doesn't forget to update a cross-reference. it can touch 15 files in one pass. the maintenance cost is near zero.
+
+**your job:** curate sources, direct the analysis, and ask good questions.
+
+**the AI's job:** everything else.

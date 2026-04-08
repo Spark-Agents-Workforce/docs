@@ -1,0 +1,115 @@
+---
+title: 'agents'
+description: 'reactive AI watchers that monitor your streams and act automatically.'
+icon: 'eye'
+---
+
+agents are where spark goes from "tool you use" to "system that works for you." instead of you asking questions, agents watch your event streams and tell you when something matters.
+
+## the pattern: watch → evaluate → act
+
+every agent follows the same three-step pattern:
+
+<Steps>
+  <Step title="watch" icon="radio">
+    monitors a specific event stream. github commits, slack messages, shopify orders, asana tasks, deploy logs, agent sessions.
+  </Step>
+  <Step title="evaluate" icon="scan">
+    AI decides what the event means. is this important? is something wrong? does this change our understanding? how confident are we?
+  </Step>
+  <Step title="act" icon="zap">
+    takes the appropriate action. score it, alert someone, update a profile, create a knowledge entry, trigger a follow-up.
+  </Step>
+</Steps>
+
+this is the pattern for every agent. the only thing that changes is what it watches and what it does.
+
+## built-in agents
+
+<AccordionGroup>
+  <Accordion title="impact scorer" icon="gauge">
+    agent #1. already running. every time a new session is detected, the impact scorer evaluates it.
+
+    it reads the events, analyzes the code changes, checks the repos, and scores the session across output, importance, and quality. then it assigns impact points and writes a reasoning explanation.
+
+    this happens automatically. every session. no human intervention. the scores show up on your observatory dashboard, person profiles, and leaderboards within minutes of the work happening.
+  </Accordion>
+  <Accordion title="session detector" icon="layers">
+    runs every 5 minutes. watches the activity stream and groups events into sessions. it's the machinery that turns raw events into coherent work units. you never see it run. you just see sessions appearing in your feed.
+  </Accordion>
+  <Accordion title="synthesis generator" icon="file-text">
+    runs on schedule. daily, weekly, monthly. reads all recent sessions and generates a narrative synthesis: "this week, the team shipped 3 features, closed 47 issues, and the highest-impact work was kevin's payment refactor at 312 impact points."
+  </Accordion>
+  <Accordion title="signal puller" icon="radar">
+    watches external tools (asana, linear, slack) for significant events that aren't code-related. task completions, urgent messages, project milestone changes. pulls them into observatory as signals.
+  </Accordion>
+</AccordionGroup>
+
+## available agents
+
+beyond the built-in ones, you can activate agents for specific watch patterns:
+
+<CardGroup cols={2}>
+  <Card title="PR quality monitor" icon="git-pull-request">
+    watches for PRs merged without review, large PRs without tests, patterns that indicate quality risk.
+  </Card>
+  <Card title="deploy watcher" icon="rocket">
+    monitors deploys and correlates with subsequent error rates or incident signals.
+  </Card>
+  <Card title="slack urgency detector" icon="bell-ring">
+    identifies high-urgency messages or escalation patterns in team channels.
+  </Card>
+  <Card title="asana completion tracker" icon="check-square">
+    watches for task movement patterns, blocked work, overdue items.
+  </Card>
+  <Card title="shopify health monitor" icon="shopping-bag">
+    order anomalies, inventory alerts, app performance signals.
+  </Card>
+  <Card title="knowledge ingest agent" icon="brain">
+    watches for new sources added to your knowledge base, runs the extraction and synthesis pipeline automatically.
+  </Card>
+  <Card title="knowledge lint agent" icon="shield-check">
+    periodically health-checks your knowledge base for contradictions, stale pages, orphaned content, and gaps.
+  </Card>
+</CardGroup>
+
+each agent is a toggle. activate the ones that matter for your team. deactivate what you don't need. think of them like specialists you hire — each one has one job and they do it well.
+
+## the agents page
+
+the agents page shows:
+
+| section | what you see |
+|---------|-------------|
+| **active agents** | what's running, what they're watching, when they last acted |
+| **available agents** | what you can turn on, what they'd watch |
+| **recent actions** | a log of what your agents did |
+| **agent health** | is each agent running correctly, are there errors, how much is it processing |
+
+<Note>this is your fleet management view. you're running a team of AI watchers and the agents page is your command center.</Note>
+
+## what IS and ISN'T an agent
+
+<Tabs>
+  <Tab title="agents (optional)">
+    - impact scoring
+    - PR quality monitoring
+    - slack urgency detection
+    - shopify order alerts
+    - knowledge ingest and lint
+    - any watch → evaluate → act pattern
+  </Tab>
+  <Tab title="primitives (always on)">
+    - event streaming from connected tools
+    - session grouping
+    - the activity feed
+    - the spark AI chat engine
+    - these are infrastructure. they can't be turned off.
+  </Tab>
+</Tabs>
+
+the test: "can someone use spark without this running?" if yes, it's an agent. if no, it's a primitive.
+
+<Card title="next: knowledge" icon="arrow-right" href="/knowledge/overview">
+  learn about the compounding brain that ties everything together.
+</Card>
