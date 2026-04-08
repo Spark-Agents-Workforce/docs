@@ -1,0 +1,74 @@
+---
+title: 'activities'
+description: 'how raw events flow into spark from your connected tools.'
+icon: 'wave-pulse'
+---
+
+activities are the smallest unit in spark. every meaningful event across your team's tools becomes an activity.
+
+## what's an activity?
+
+a commit pushed to github. a PR opened. a deploy triggered. a slack message in your team channel. an asana task moved to "done." a shopify order flagged. a linear issue closed.
+
+each one is a single, timestamped event with an **actor** (who did it), a **source** (where it happened), and a **payload** (what exactly occurred).
+
+activities flow in continuously. you don't create them. they arrive automatically from your connected tools.
+
+## connecting your tools
+
+spark connects to the tools your team already uses:
+
+<CardGroup cols={2}>
+  <Card title="github" icon="github">
+    commits, pull requests, reviews, CI runs, releases
+  </Card>
+  <Card title="slack" icon="slack">
+    messages, threads, reactions, channel activity
+  </Card>
+  <Card title="asana" icon="list-check">
+    task creation, completion, movement, comments
+  </Card>
+  <Card title="linear" icon="chart-gantt">
+    issues, cycles, project updates
+  </Card>
+  <Card title="shopify" icon="shop">
+    orders, inventory changes, app events
+  </Card>
+  <Card title="custom sources" icon="webhook">
+    webhook endpoints for anything else
+  </Card>
+</CardGroup>
+
+<Tip>connect a tool and its events start streaming into your observatory feed immediately. no batch import. real-time.</Tip>
+
+## the activity feed
+
+the activity feed is a chronological stream of everything happening across your team. a unified timeline. instead of scrolling through five different tools, everything is in one place.
+
+**filter by:**
+
+| filter | what it does |
+|--------|-------------|
+| **actor** | everything one person did |
+| **source** | everything from one tool (all github activity, all slack activity) |
+| **repository/project** | scope to a specific codebase or project |
+| **time** | today, this week, custom range |
+| **event type** | just commits, just PRs, just deploys |
+
+the feed is useful on its own. it answers "what's happening right now?" at a glance. but its real power is what happens next.
+
+## activities → sessions
+
+raw events are noisy. dozens of commits, PR comments, and slack messages in a day. that's not insight. that's a firehose.
+
+spark watches the activity stream and automatically groups related events into **sessions** — coherent units of work. a cluster of commits to the same repo by the same person within a time window becomes one session:
+
+<Note>
+"kevin worked on checkout-v2 for 2h15m, 14 commits, 2 PRs."
+</Note>
+
+this is where raw data starts becoming useful. activities are atoms. sessions are the first level of meaning.
+
+<Card title="next: sessions" icon="arrow-right" href="/observatory/sessions">
+  learn how sessions are scored and what they reveal about your team's work.
+</Card>

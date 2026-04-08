@@ -1,0 +1,108 @@
+---
+title: 'sessions'
+description: 'how activities get grouped into scored units of work.'
+icon: 'layer-group'
+---
+
+sessions are where observatory starts creating intelligence. instead of a firehose of individual events, you see coherent units of work. who did what, for how long, and what it meant.
+
+## how sessions work
+
+spark's AI watches the activity stream and continuously groups related events into sessions. the grouping is automatic. no manual tagging, no time tracking, no standups required.
+
+a session is defined by:
+
+| property | what it means |
+|----------|--------------|
+| **actor** | one person (or one AI agent) |
+| **time window** | a continuous cluster of activity (e.g., 9:00 AM to 11:15 AM) |
+| **related events** | commits to the same repo, PR activity, linked tasks |
+| **context** | what tools were involved, what repos were touched, what changed |
+
+<Note>
+"dominic worked on the boost split testing feature for 3h20m. 22 commits across 2 repos, 1 PR merged, 3 asana tasks completed."
+
+that's a session. one card. one unit of work. easy to read at a glance.
+</Note>
+
+## the session detail view
+
+click into any session and you see the full picture:
+
+<AccordionGroup>
+  <Accordion title="summary">
+    AI-generated narrative of what happened. "dominic implemented A/B testing for the pricing page. added variant logic, updated the shopify theme, and wrote integration tests."
+  </Accordion>
+  <Accordion title="events">
+    the raw activities that make up this session, in order.
+  </Accordion>
+  <Accordion title="repos & duration">
+    which codebases were touched and how long the work took.
+  </Accordion>
+  <Accordion title="skills">
+    what domain areas were involved — frontend, backend, testing, infrastructure.
+  </Accordion>
+  <Accordion title="decisions made">
+    key choices the AI identified from the activity.
+  </Accordion>
+  <Accordion title="risks identified">
+    potential issues the AI flagged.
+  </Accordion>
+  <Accordion title="suggested next steps">
+    what logically comes after this work.
+  </Accordion>
+</AccordionGroup>
+
+## AI scoring
+
+every session gets scored by AI across multiple dimensions. this is what turns "stuff happened" into "here's how impactful it was."
+
+**impact points** — a single number representing overall value created. the headline metric.
+
+<CardGroup cols={3}>
+  <Card title="output" icon="gauge-high">
+    how much was produced
+  </Card>
+  <Card title="importance" icon="star">
+    how strategically significant was this work
+  </Card>
+  <Card title="quality" icon="gem">
+    how well was it done — code quality, thoroughness, testing
+  </Card>
+</CardGroup>
+
+<Tip>scores aren't just numbers. each one comes with reasoning. the AI explains why it scored the way it did. you can see the logic, disagree, and provide feedback that improves future scoring.</Tip>
+
+## session types
+
+not all work looks the same. sessions capture different types of activity:
+
+| type | description |
+|------|-------------|
+| **deep work** | long focused sessions with high commit density |
+| **review work** | PR reviews, code review, feedback loops |
+| **coordination** | slack-heavy sessions with task management |
+| **firefighting** | rapid response to incidents or bugs |
+| **exploration** | research, prototyping, investigation |
+
+the AI identifies the work type and factors it into scoring. a 30-minute firefighting session that saves production is scored differently than a 30-minute slack conversation.
+
+## sessions for AI agents
+
+<Warning>
+this is critical. as teams delegate more work to AI agents, you need the same observability into agent work as human work.
+</Warning>
+
+sessions aren't just for humans. when your AI agents work — codex writing code, claude reviewing PRs, custom agents running pipelines — their activity creates sessions too. same scoring, same visibility.
+
+"what did our agents accomplish today?" is answered the same way as "what did kevin accomplish today?"
+
+## sessions → knowledge
+
+any session can become a knowledge source. when a session produces insights, decisions, or patterns worth remembering, it flows into the knowledge base where the AI extracts and synthesizes it into the team's compounding wiki.
+
+this is the bridge between what happened (observatory) and what it means (knowledge).
+
+<Card title="next: spark" icon="arrow-right" href="/spark/ask-anything">
+  learn how to ask questions about all this data.
+</Card>
