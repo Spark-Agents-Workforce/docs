@@ -1,0 +1,142 @@
+---
+title: 'integrations'
+description: 'native connectors for github, slack, asana, linear, and shopify.'
+icon: 'cable'
+---
+
+spark has native integrations for the tools your team already uses. events flow in automatically — no polling, no batch imports, real-time.
+
+<AccordionGroup>
+  <Accordion title="github" icon="git-branch">
+    spark's primary integration. receives webhooks for commits, pull requests, reviews, CI runs, and releases.
+
+    <Steps>
+      <Step title="navigate to settings">
+        go to **settings → integrations → github**
+      </Step>
+      <Step title="authorize the spark github app">
+        click "connect github" and authorize the spark github app in your organization
+      </Step>
+      <Step title="select repositories">
+        choose individual repositories or grant access to all repos
+      </Step>
+    </Steps>
+
+    the webhook URL is automatically configured during github app install. delivery is real-time.
+
+    | event | description |
+    |-------|-------------|
+    | `push` | commits with author, message, files changed, additions/deletions |
+    | `pull_request` | opened, closed, merged, review requested |
+    | `pull_request_review` | approved, changes requested, commented |
+    | `check_run` | CI pass/fail with duration |
+    | `release` | published releases with tag |
+  </Accordion>
+
+  <Accordion title="slack" icon="hash">
+    connects to your workspace via slack app. captures messages, threads, and reactions from selected channels.
+
+    <Steps>
+      <Step title="navigate to settings">
+        go to **settings → integrations → slack**
+      </Step>
+      <Step title="install the spark slack app">
+        click "connect slack" and install the spark app to your workspace
+      </Step>
+      <Step title="select channels">
+        choose which channels spark can access — access is granted per-channel
+      </Step>
+    </Steps>
+
+    <Warning>
+      spark never reads DMs. channel access is explicitly granted per-channel during setup.
+    </Warning>
+
+    | event | description |
+    |-------|-------------|
+    | `message` | text, author, channel, timestamp, thread parent |
+    | `reaction_added` | emoji reactions (useful for signal detection) |
+    | `thread_reply` | threaded conversations |
+  </Accordion>
+
+  <Accordion title="asana" icon="check-square">
+    task lifecycle events across your asana workspace.
+
+    <Steps>
+      <Step title="navigate to settings">
+        go to **settings → integrations → asana**
+      </Step>
+      <Step title="authorize asana">
+        click "connect asana" and authorize access to your workspace
+      </Step>
+      <Step title="select projects">
+        choose which projects spark should monitor
+      </Step>
+    </Steps>
+
+    | event | description |
+    |-------|-------------|
+    | task created | new tasks added to monitored projects |
+    | task completed | tasks marked done |
+    | task deleted | tasks removed |
+    | task moved | tasks moved between sections or columns |
+    | comment added | comments on tasks |
+    | milestone change | project milestone status updates |
+    | assignee change | task reassignment |
+  </Accordion>
+
+  <Accordion title="linear" icon="triangle">
+    issue and project tracking events from your linear workspace.
+
+    <Steps>
+      <Step title="navigate to settings">
+        go to **settings → integrations → linear**
+      </Step>
+      <Step title="authorize linear">
+        click "connect linear" and authorize the spark app
+      </Step>
+      <Step title="select teams">
+        choose which linear teams spark should monitor
+      </Step>
+    </Steps>
+
+    | event | description |
+    |-------|-------------|
+    | issue created | new issues across monitored teams |
+    | issue updated | status, priority, label, or assignee changes |
+    | issue closed | issues moved to completed or cancelled |
+    | cycle start/end | sprint cycle boundaries |
+    | project status change | project-level status updates |
+    | label change | label additions and removals |
+    | priority change | issue priority updates |
+  </Accordion>
+
+  <Accordion title="shopify" icon="shopping-bag">
+    ecommerce activity events from your shopify store.
+
+    <Steps>
+      <Step title="navigate to settings">
+        go to **settings → integrations → shopify**
+      </Step>
+      <Step title="install the spark shopify app">
+        find spark in the shopify app store and install it to your store
+      </Step>
+      <Step title="configure event types">
+        select which event categories spark should capture
+      </Step>
+    </Steps>
+
+    | event | description |
+    |-------|-------------|
+    | order created | new orders with value and line items |
+    | order fulfilled | fulfillment confirmation |
+    | order refunded | refund events |
+    | inventory change | stock level updates |
+    | checkout event | checkout initiated, abandoned, completed |
+    | app event | shopify app lifecycle events |
+  </Accordion>
+</AccordionGroup>
+
+<Card title="next: custom webhooks" icon="arrow-right" href="/connect/webhooks">
+  send events from tools spark doesn't natively support.
+</Card>

@@ -80,8 +80,12 @@
         "tab": "Connect",
         "groups": [
           {
-            "group": "Coming Soon",
-            "pages": []
+            "group": "Getting Started",
+            "pages": ["connect/overview", "connect/integrations"]
+          },
+          {
+            "group": "Developer Reference",
+            "pages": ["connect/webhooks", "connect/api", "connect/cli", "connect/mcp"]
           }
         ]
       }

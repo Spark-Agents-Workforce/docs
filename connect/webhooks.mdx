@@ -1,0 +1,74 @@
+---
+title: 'custom webhooks'
+description: 'send events from any tool directly to the spark ingestion API.'
+icon: 'webhook'
+---
+
+for tools spark doesn't natively support, send events directly to the API. they're ingested identically to native integrations — same session grouping, same scoring, same visibility.
+
+## endpoint
+
+```
+POST /api/v1/events
+```
+
+## request
+
+**headers:**
+
+```bash
+Authorization: Bearer obs_your_api_key
+Content-Type: application/json
+```
+
+**payload:**
+
+```json
+{
+  "actor": "maya",
+  "source": "custom-tool",
+  "type": "task_completed",
+  "timestamp": "2026-04-07T15:30:00Z",
+  "payload": {
+    "title": "shipped notification system",
+    "repo": "app-core",
+    "metadata": {}
+  }
+}
+```
+
+## fields
+
+| field | type | required | description |
+|-------|------|----------|-------------|
+| `actor` | string | yes | identifier for who performed the action |
+| `source` | string | yes | name of the tool or system sending the event |
+| `type` | string | yes | event type (e.g. `task_completed`, `deploy_finished`) |
+| `timestamp` | ISO 8601 | no | defaults to time of receipt if omitted |
+| `payload` | object | no | arbitrary JSON — any additional context |
+
+## example
+
+```bash
+curl -X POST https://your-deployment.convex.site/api/v1/events \
+  -H "Authorization: Bearer obs_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "actor": "sam",
+    "source": "jira",
+    "type": "issue_closed",
+    "payload": {
+      "key": "ENG-482",
+      "title": "fix checkout timeout",
+      "points": 3
+    }
+  }'
+```
+
+<Tip>
+  events sent via webhook are ingested into the activity stream identically to native integrations. same session grouping, same scoring, same visibility.
+</Tip>
+
+<Card title="next: API reference" icon="arrow-right" href="/connect/api">
+  query all spark data over HTTP — seven read-only endpoints.
+</Card>

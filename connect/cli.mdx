@@ -1,0 +1,125 @@
+---
+title: 'CLI'
+description: 'command-line access to all spark API endpoints.'
+icon: 'terminal'
+---
+
+the spark CLI wraps every API endpoint. outputs JSON by default, pipes cleanly to `jq`.
+
+## install
+
+```bash
+npm install -g @sparkagents/cli
+```
+
+## configure
+
+```bash
+export OBSERVATORY_URL=https://your-deployment.convex.site
+export OBSERVATORY_API_KEY=obs_your_api_key
+```
+
+add these to your shell profile (`~/.zshrc`, `~/.bashrc`) to persist across sessions.
+
+---
+
+## commands
+
+### team overview
+
+```bash
+spark team
+spark team --period week
+spark team --period month
+```
+
+returns team rankings, impact scores, sparklines, and status for each member.
+
+### individual profile
+
+```bash
+spark person maya
+spark person sam
+```
+
+returns the 30-day activity profile for one person — sessions, impact, dimension scores, goal allocation, and recent work.
+
+### event stream
+
+```bash
+spark events
+spark events --actor sam
+spark events --actor sam --since friday
+spark events --source github --repo app-core
+spark events --type pull_request --limit 20
+```
+
+returns the filtered event stream. `--since` and `--until` accept ISO 8601 timestamps or natural-language shortcuts (`today`, `yesterday`, `monday`, `friday`).
+
+### daily synthesis
+
+```bash
+spark summary
+spark summary --date 2026-04-07
+spark summary --period weekly
+spark summary --period monthly
+```
+
+returns the AI-generated narrative summary for the specified period.
+
+### goal progress
+
+```bash
+spark goals
+spark goals --status active
+spark goals --status completed
+spark goals --since 2026-04-01
+```
+
+returns goals with session counts, impact totals, and contributor lists.
+
+### unmapped sessions
+
+```bash
+spark unmapped
+spark unmapped --since monday
+spark unmapped --limit 50
+```
+
+returns sessions not mapped to any goal. useful for finding work that happened outside your current goal structure.
+
+### system health
+
+```bash
+spark health
+```
+
+returns subsystem status — webhook ingestion, scoring pipeline, and synthesis. exits with code 1 if any subsystem is unhealthy, making it suitable for monitoring scripts.
+
+---
+
+## pipe to jq
+
+all commands output valid JSON. pipe to `jq` for filtering and formatting:
+
+<CodeGroup>
+```bash team rankings
+spark team --period week | jq '.members[] | {actor, impact, status}'
+```
+
+```bash recent events
+spark events --actor maya --limit 5 | jq '.events[] | {type, timestamp, payload.title}'
+```
+
+```bash health check
+spark health | jq '.overall'
+```
+
+```bash unmapped work
+spark unmapped --since monday | jq '.sessions[] | {actor, summary, impact}'
+```
+</CodeGroup>
+
+<Card title="next: MCP server" icon="arrow-right" href="/connect/mcp">
+  expose spark as native tools for AI agents.
+</Card>

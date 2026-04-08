@@ -1,0 +1,323 @@
+---
+title: 'API reference'
+description: 'seven read-only endpoints for querying all spark data over HTTP.'
+icon: 'code'
+---
+
+<Note>
+  all endpoints are read-only. the API cannot modify data, create events, or change configuration.
+</Note>
+
+## authentication
+
+all endpoints require bearer token auth.
+
+1. generate an API key in **settings → API**
+2. set `OBSERVATORY_API_KEY` in your convex deployment environment
+3. pass the key in every request:
+
+```bash
+Authorization: Bearer obs_your_api_key
+```
+
+**base URL:** `https://your-deployment.convex.site`
+
+---
+
+## GET /api/v1/team
+
+team overview with rankings, impact scores, sparklines, and status.
+
+| param | type | default | description |
+|-------|------|---------|-------------|
+| `period` | `today` \| `week` \| `month` | `today` | time window for the overview |
+
+```bash
+curl https://your-deployment.convex.site/api/v1/team?period=week \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "members": [
+    {
+      "actor": "maya",
+      "displayName": "Maya Chen",
+      "impact": 1842,
+      "delta": 47,
+      "sessions": 12,
+      "commits": 89,
+      "repos": ["app-core", "api"],
+      "status": "active",
+      "dailyImpacts": [210, 180, 340, 290, 0, 410, 412],
+      "rank": 1,
+      "prevRank": 1
+    },
+    {
+      "actor": "sam",
+      "displayName": "Sam Rivera",
+      "impact": 1423,
+      "delta": -12,
+      "sessions": 9,
+      "commits": 54,
+      "repos": ["frontend", "design-system"],
+      "status": "active",
+      "dailyImpacts": [190, 210, 280, 190, 0, 320, 233],
+      "rank": 2,
+      "prevRank": 2
+    }
+  ],
+  "totalImpact": 3565,
+  "avgImpact": 891
+}
+```
+
+---
+
+## GET /api/v1/person
+
+individual activity profile. 30-day rolling window.
+
+| param | type | required | description |
+|-------|------|----------|-------------|
+| `actor` | string | yes | actor identifier |
+
+```bash
+curl "https://your-deployment.convex.site/api/v1/person?actor=maya" \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "actor": "maya",
+  "displayName": "Maya Chen",
+  "totalSessions": 48,
+  "totalImpact": 7240,
+  "dimensions": {
+    "execution": 82,
+    "completion": 91,
+    "strategic": 74,
+    "craft": 88
+  },
+  "skills": ["backend", "api-design", "testing"],
+  "goalAllocation": {
+    "infra-migration": 0.42,
+    "onboarding-redesign": 0.31,
+    "unmapped": 0.27
+  },
+  "workTypes": {
+    "feature": 0.55,
+    "bugfix": 0.22,
+    "review": 0.14,
+    "infrastructure": 0.09
+  },
+  "recentSessions": [
+    {
+      "id": "sess_9kx2m",
+      "summary": "implemented rate limiting for the public API",
+      "impact": 312,
+      "duration": "2h40m",
+      "repos": ["api"],
+      "at": "2026-04-07T14:00:00Z"
+    }
+  ],
+  "activityByHour": [0, 0, 0, 0, 0, 0, 0, 2, 8, 14, 18, 12, 6, 10, 16, 14, 10, 6, 2, 1, 0, 0, 0, 0],
+  "activityByDay": [18, 22, 19, 24, 14, 0, 0],
+  "decisions": ["chose postgres over redis for session storage", "deprecated legacy auth middleware"],
+  "velocityAssessment": "strong — above 90th percentile on execution this month"
+}
+```
+
+---
+
+## GET /api/v1/events
+
+filtered event stream. all params are optional — omit to get the full stream.
+
+| param | type | default | description |
+|-------|------|---------|-------------|
+| `actor` | string | — | filter by actor identifier |
+| `source` | string | — | filter by source tool (e.g. `github`, `slack`) |
+| `repo` | string | — | filter by repository name |
+| `type` | string | — | filter by event type (e.g. `push`, `pull_request`) |
+| `since` | ISO 8601 | — | return events after this timestamp |
+| `until` | ISO 8601 | — | return events before this timestamp |
+| `limit` | number | `50` | max results returned (max 200) |
+
+```bash
+curl "https://your-deployment.convex.site/api/v1/events?actor=sam&source=github&limit=10" \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "events": [
+    {
+      "id": "evt_7hq4p",
+      "actor": "sam",
+      "source": "github",
+      "type": "pull_request",
+      "timestamp": "2026-04-07T13:22:00Z",
+      "payload": {
+        "action": "merged",
+        "pr": 284,
+        "title": "add dark mode to settings panel",
+        "repo": "frontend",
+        "commits": 6
+      }
+    }
+  ],
+  "count": 1,
+  "hasMore": false
+}
+```
+
+---
+
+## GET /api/v1/summary
+
+AI-generated synthesis for a time period. returns the narrative summary with key themes and highlights.
+
+| param | type | default | description |
+|-------|------|---------|-------------|
+| `date` | `YYYY-MM-DD` | today | target date for the summary |
+| `period` | `daily` \| `weekly` \| `monthly` | `daily` | synthesis window |
+
+```bash
+curl "https://your-deployment.convex.site/api/v1/summary?date=2026-04-07&period=daily" \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "date": "2026-04-07",
+  "period": "daily",
+  "summary": "strong execution day across the team. maya finished the rate limiting implementation and pushed it to staging. sam merged the dark mode settings PR after two rounds of review. alex unblocked the mobile team by fixing the auth token refresh bug that had been open since friday.",
+  "themes": ["api hardening", "ui polish", "mobile unblocking"],
+  "highlights": [
+    "3 PRs merged",
+    "1 major bug resolved",
+    "0 incidents"
+  ],
+  "totalImpact": 1842,
+  "activeMembersCount": 3,
+  "generatedAt": "2026-04-07T23:45:00Z"
+}
+```
+
+---
+
+## GET /api/v1/goals
+
+goal progress with session mapping and completion tracking.
+
+| param | type | default | description |
+|-------|------|---------|-------------|
+| `status` | `active` \| `completed` \| `all` | `active` | filter by goal status |
+| `since` | ISO 8601 | — | only include sessions after this timestamp |
+
+```bash
+curl "https://your-deployment.convex.site/api/v1/goals?status=active" \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "goals": [
+    {
+      "id": "goal_3mp9k",
+      "title": "infra migration to new cluster",
+      "status": "active",
+      "progress": 0.68,
+      "sessions": 24,
+      "totalImpact": 4120,
+      "contributors": ["maya", "alex"],
+      "lastActivityAt": "2026-04-07T14:00:00Z"
+    },
+    {
+      "id": "goal_7rx2c",
+      "title": "onboarding redesign",
+      "status": "active",
+      "progress": 0.31,
+      "sessions": 11,
+      "totalImpact": 1840,
+      "contributors": ["sam"],
+      "lastActivityAt": "2026-04-06T17:30:00Z"
+    }
+  ],
+  "count": 2
+}
+```
+
+---
+
+## GET /api/v1/unmapped
+
+sessions not mapped to any goal. useful for identifying work that's happening outside your goal structure.
+
+| param | type | default | description |
+|-------|------|---------|-------------|
+| `since` | ISO 8601 | 7 days ago | start of the window to search |
+| `limit` | number | `20` | max results returned |
+
+```bash
+curl "https://your-deployment.convex.site/api/v1/unmapped?since=2026-04-01T00:00:00Z" \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "sessions": [
+    {
+      "id": "sess_4jk8n",
+      "actor": "alex",
+      "summary": "investigated slow queries in the reporting dashboard",
+      "impact": 210,
+      "duration": "1h15m",
+      "repos": ["analytics"],
+      "at": "2026-04-05T11:00:00Z",
+      "suggestedGoals": ["performance improvements"]
+    }
+  ],
+  "count": 1,
+  "totalUnmappedImpact": 210
+}
+```
+
+---
+
+## GET /api/v1/health
+
+system health across all subsystems. useful for monitoring and alerting.
+
+```bash
+curl https://your-deployment.convex.site/api/v1/health \
+  -H "Authorization: Bearer obs_your_api_key"
+```
+
+```json
+{
+  "webhook": {
+    "status": "healthy",
+    "lastEventAt": 1712534400000,
+    "eventsLast24h": 342
+  },
+  "scoring": {
+    "status": "healthy",
+    "unscoredSessions": 0,
+    "lastScoredAt": 1712534200000
+  },
+  "synthesis": {
+    "status": "healthy",
+    "lastSynthesisAt": 1712520000000,
+    "lastPeriod": "daily"
+  },
+  "overall": "healthy"
+}
+```
+
+`overall` is `healthy` when all subsystems are healthy, `degraded` when one or more are behind, and `unhealthy` when a subsystem has stopped.
+
+<Card title="next: CLI" icon="arrow-right" href="/connect/cli">
+  command-line access to all seven endpoints.
+</Card>

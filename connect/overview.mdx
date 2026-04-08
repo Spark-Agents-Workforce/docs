@@ -1,0 +1,41 @@
+---
+title: 'connect'
+description: 'integrations, API, CLI, and MCP server reference.'
+icon: 'plug'
+---
+
+spark ingests data through integrations, webhooks, and API calls. this section covers how to connect your tools and how to query spark programmatically.
+
+## three ways to connect
+
+<CardGroup cols={3}>
+  <Card title="integrations" icon="cable">
+    native connectors for github, slack, asana, linear, and shopify. events flow in automatically.
+  </Card>
+  <Card title="API & webhooks" icon="webhook">
+    custom event ingestion and full read access to all spark data over HTTP.
+  </Card>
+  <Card title="MCP server" icon="cpu">
+    AI agents query spark as native tools. works with claude desktop, cursor, and openclaw.
+  </Card>
+</CardGroup>
+
+## pages
+
+<CardGroup cols={2}>
+  <Card title="integrations" icon="cable" href="/connect/integrations">
+    connect github, slack, asana, linear, and shopify. setup steps and events captured for each.
+  </Card>
+  <Card title="custom webhooks" icon="webhook" href="/connect/webhooks">
+    send events from any tool directly to the spark API. same ingestion pipeline as native integrations.
+  </Card>
+  <Card title="API reference" icon="code" href="/connect/api">
+    seven read-only endpoints — team, person, events, summary, goals, unmapped, and health.
+  </Card>
+  <Card title="CLI" icon="terminal" href="/connect/cli">
+    command-line access to all API endpoints. outputs JSON, pipes cleanly to jq.
+  </Card>
+  <Card title="MCP server" icon="cpu" href="/connect/mcp">
+    expose spark data as MCP tools. drop into any AI agent that supports MCP.
+  </Card>
+</CardGroup>

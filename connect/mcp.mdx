@@ -1,0 +1,125 @@
+---
+title: 'MCP server'
+description: 'expose spark data as tools for AI agents via the model context protocol.'
+icon: 'cpu'
+---
+
+spark ships an MCP server so AI agents can query observatory data as native tools. drop it into any MCP-compatible host and your agents can ask "what did the team ship this week?" as a function call.
+
+## install
+
+```bash
+npm install -g @sparkagents/mcp
+```
+
+## configure
+
+add the spark MCP server to your AI tool's config file:
+
+<Tabs>
+  <Tab title="Claude Desktop">
+    add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "observatory": {
+          "command": "npx",
+          "args": ["@sparkagents/mcp"],
+          "env": {
+            "OBSERVATORY_URL": "https://your-deployment.convex.site",
+            "OBSERVATORY_API_KEY": "obs_your_api_key"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="Cursor">
+    add to `~/.cursor/mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "observatory": {
+          "command": "npx",
+          "args": ["@sparkagents/mcp"],
+          "env": {
+            "OBSERVATORY_URL": "https://your-deployment.convex.site",
+            "OBSERVATORY_API_KEY": "obs_your_api_key"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="OpenClaw">
+    add to `~/.openclaw/settings.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "observatory": {
+          "command": "npx",
+          "args": ["@sparkagents/mcp"],
+          "env": {
+            "OBSERVATORY_URL": "https://your-deployment.convex.site",
+            "OBSERVATORY_API_KEY": "obs_your_api_key"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+restart your AI tool after saving the config. the tools will appear automatically.
+
+## available tools
+
+each tool accepts the same params as the corresponding API endpoint and returns JSON.
+
+| tool | description |
+|------|-------------|
+| `get_team_overview` | team rankings, impact scores, sparklines, and status |
+| `get_person_activity` | 30-day individual profile with scores, sessions, and goal allocation |
+| `get_daily_summary` | AI-generated narrative synthesis for a date or period |
+| `get_goal_progress` | goals with session mapping, impact totals, and completion data |
+| `get_events` | filtered event stream — accepts actor, source, repo, type, since, until |
+| `get_system_health` | subsystem status and diagnostics |
+| `get_unmapped_activity` | sessions not mapped to any goal |
+
+---
+
+## installer (coming soon)
+
+a single command that configures all your AI coding tools to report sessions to spark:
+
+```bash
+curl -fsSL https://sparkagents.com/install.sh | bash
+```
+
+<Steps>
+  <Step title="detect installed tools">
+    the installer scans for claude code, codex, gemini CLI, and cursor
+  </Step>
+  <Step title="configure hooks">
+    writes hook entries to each tool's settings file:
+    - claude code: `~/.claude/settings.json` → `Stop` event
+    - codex: `~/.codex/hooks.json` → `Stop` event + OTel export
+    - gemini CLI: `.gemini/settings.json` → `SessionEnd` event
+    - cursor: `~/.cursor/hooks.json` → `afterAgentResponse` event
+  </Step>
+  <Step title="add MCP server">
+    auto-adds the spark MCP server to all detected tool configs
+  </Step>
+  <Step title="start the uploader daemon">
+    starts a file watcher that tails JSONL activity files from all tools as a safety net — batches, deduplicates, and POSTs to your spark API
+  </Step>
+</Steps>
+
+all channels feed a unified uploader. no duplicate events.
+
+<Card title="back to connect overview" icon="plug" href="/connect/overview">
+  see all connect options at a glance.
+</Card>
