@@ -1,0 +1,79 @@
+---
+title: 'pages'
+description: 'the synthesized wiki — page types, citations, backlinks, and how pages evolve.'
+icon: 'file-text'
+---
+
+pages are the output of the knowledge layer. ai-written, ai-maintained wiki pages that synthesize everything youve fed the system into structured, interlinked knowledge.
+
+you rarely write pages yourself. you feed sources. the ai writes the pages.
+
+## page types
+
+<CardGroup cols={2}>
+  <Card title="entity" icon="users">
+    people, tools, companies, products. "react," "stripe," "competitor x," "kevin." a living profile built from every source that mentions them.
+  </Card>
+  <Card title="concept" icon="lightbulb">
+    ideas, patterns, methodologies. "microservices," "a/b testing," "event-driven architecture." explained and contextualized based on what your team has learned.
+  </Card>
+  <Card title="project" icon="folder">
+    specific initiatives. "auth migration," "q2 launch," "knowledge layer build." whats happened, whats decided, whats next.
+  </Card>
+  <Card title="pattern" icon="git-branch">
+    recurring patterns across your data. "when agents hit api rate limits, the successful recovery pattern is x. the failing pattern is y."
+  </Card>
+  <Card title="decision" icon="bookmark">
+    choices made and why. "we chose convex over supabase because..." preserves the reasoning so future team members understand the why, not just the what.
+  </Card>
+  <Card title="question" icon="circle-help">
+    open questions that need investigation. auto-generated when the ai identifies gaps in your knowledge. "no page exists for react server components, but its referenced in 3 sources."
+  </Card>
+</CardGroup>
+
+## what a page looks like
+
+every page has:
+
+<CardGroup cols={2}>
+  <Card title="content" icon="file-text">
+    ai-written markdown. synthesized from every source that contributed. not a copy-paste from one source. a genuine synthesis that integrates multiple perspectives.
+  </Card>
+  <Card title="citations" icon="quote">
+    inline citation badges. hover over any claim and see which source it came from, with the relevant excerpt. this is how you trust synthesized knowledge. every assertion is traceable.
+  </Card>
+  <Card title="backlinks" icon="link-2">
+    a sidebar showing every other page that references this one. "what links here?" tells you how central this concept is and what it connects to.
+  </Card>
+  <Card title="tags" icon="tags">
+    for discovery and filtering. auto-applied by the ai based on content.
+  </Card>
+  <Card title="confidence score" icon="badge-check">
+    0 to 1. how well-sourced is this page? a page built from 8 sources has higher confidence than one built from a single note. tells you at a glance how much to trust it.
+  </Card>
+  <Card title="version history" icon="history">
+    see how the page evolved over time. every time a new source updates a page, a version snapshot is saved with the reason for the change. "updated after ingesting quarterly-review.pdf."
+  </Card>
+</CardGroup>
+
+## how pages evolve
+
+pages arent static. they change every time a relevant source enters the system.
+
+<Steps>
+  <Step title="day 1" icon="calendar">
+    you drop in an article about react performance. the ai creates a "react performance" page with key findings.
+  </Step>
+  <Step title="day 15" icon="calendar-range">
+    you add a blog post comparing react and svelte performance. the ai updates the "react performance" page with the new data, notes where the blog post agrees or disagrees with the original article, and creates a cross-reference to a new "svelte" page.
+  </Step>
+  <Step title="day 30" icon="calendar">
+    a team member pushes in meeting notes where a decision was made to optimize react rendering. the ai updates the page again, adds a link to the decision page, and adjusts the confidence score upward because now three sources agree.
+  </Step>
+</Steps>
+
+the page gets richer with every source. not longer. smarter. the ai synthesizes, it doesnt just append.
+
+<Card title="next: graph" icon="arrow-right" href="/knowledge/graph">
+  how knowledge connects — typed links, backlinks, and the growing web of understanding.
+</Card>

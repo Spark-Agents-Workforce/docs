@@ -1,0 +1,73 @@
+---
+title: 'sources'
+description: 'knowledge units — how to feed the system and what happens when you do.'
+icon: 'file-input'
+---
+
+sources are the raw inputs to your knowledge stream. every piece of knowledge enters the system as a source. an immutable document that the ai reads, extracts from, and synthesizes into wiki pages.
+
+## types of sources
+
+<CardGroup cols={2}>
+  <Card title="url" icon="link">
+    paste a link. spark fetches the page, converts it to readable text, and processes it. articles, blog posts, documentation, github readmes, research papers with public urls.
+  </Card>
+  <Card title="document" icon="file-text">
+    upload a file. pdfs, markdown files, text documents. drag and drop or use the upload button. supports files up to 25mb.
+  </Card>
+  <Card title="note" icon="pen-line">
+    type or paste raw text. your observations, ideas, quick notes from a conversation. dont worry about formatting. the ai structures it.
+  </Card>
+  <Card title="session" icon="layers">
+    any observatory session can become a source. when a work session produces insights, decisions, or patterns worth remembering, push it to knowledge. the ai extracts what matters and integrates it into the wiki.
+  </Card>
+</CardGroup>
+
+## shooting it in
+
+the fastest path from "i learned something" to "its in the system" is the quick-add modal. accessible from anywhere in spark. the sidebar always has an "add knowledge" button.
+
+<Note>three tabs: paste a url, upload a file, or type a note. one action. done.</Note>
+
+this should feel like tweeting for your teams brain. low friction, high value. you dont think about where it goes or how it gets organized. you just push it in.
+
+## what happens after upload
+
+when a source arrives, the knowledge ingest agent runs a multi-step pipeline:
+
+<Steps>
+  <Step title="chunk" icon="scissors">
+    large documents get split into manageable segments
+  </Step>
+  <Step title="extract" icon="scan">
+    ai reads the source and identifies entities (people, tools, concepts, projects), claims (assertions and facts), and relationships
+  </Step>
+  <Step title="synthesize" icon="combine">
+    creates new wiki pages or updates existing ones, integrating new information into whats already known
+  </Step>
+  <Step title="cross-reference" icon="git-compare">
+    scans for connections to other pages, creates typed links
+  </Step>
+  <Step title="attribute" icon="bookmark">
+    links every claim back to its source, so you can always trace "where did this come from?"
+  </Step>
+</Steps>
+
+<Tip>one source can touch 10-15 wiki pages. you can watch the progress in real-time. the ingest tracker shows each step as it happens.</Tip>
+
+## source management
+
+the sources page shows everything youve fed the system:
+
+| field | detail |
+|-------|--------|
+| status | pending, processing, processed, failed |
+| type | url, document, note, session |
+| when it was added | when it was added |
+| what pages it contributed to | what pages it contributed to |
+
+sources are immutable. the ai reads from them but never changes them. theyre your source of truth. the wiki is the ais interpretation. the sources are the evidence.
+
+<Card title="next: pages" icon="arrow-right" href="/knowledge/pages">
+  the synthesized wiki — page types, citations, backlinks, and how pages evolve.
+</Card>

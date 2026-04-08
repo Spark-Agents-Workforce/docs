@@ -1,0 +1,82 @@
+---
+title: 'graph'
+description: 'how knowledge connects — typed links, backlinks, and the growing web of understanding.'
+icon: 'git-compare'
+---
+
+knowledge isnt a list of pages. its a web of connections.
+
+every time the knowledge ingest agent processes a source, it doesnt just create or update pages. it creates links between them. these links are the real value. theyre how isolated facts become connected understanding.
+
+## typed links
+
+not all connections are the same. the ai creates six types of links, each with a specific meaning:
+
+<CardGroup cols={2}>
+  <Card title="mentions" icon="at-sign">
+    simple reference. page a talks about the concept on page b. the most common link type.
+  </Card>
+  <Card title="depends on" icon="arrow-down">
+    conceptual dependency. understanding a requires understanding b first. "react hooks depends on react components."
+  </Card>
+  <Card title="contradicts" icon="octagon-alert">
+    conflicting information. two pages disagree. "source from january says pricing is $99/mo. source from march says $149/mo." contradictions are flagged, not hidden.
+  </Card>
+  <Card title="supersedes" icon="arrow-up-right">
+    one page replaces another. "v2 api reference supersedes v1 api reference." the old page stays for history, but the link makes clear whats current.
+  </Card>
+  <Card title="part of" icon="layers">
+    hierarchy. "react hooks is part of react." builds a natural tree structure.
+  </Card>
+  <Card title="related to" icon="sparkles">
+    general association. the ai sees a connection but it doesnt fit the specific types above. useful for serendipitous discovery.
+  </Card>
+</CardGroup>
+
+## backlinks
+
+every page shows its backlinks. all the pages that reference it. this tells you two things:
+
+1. **how central is this concept?** a page with 30 backlinks is a hub. a page with zero might be an orphan worth archiving.
+2. **whats connected?** youre reading about "stripe webhooks" and see backlinks from "payment processing," "error handling," and "event architecture." each one is a thread you can follow.
+
+backlinks are automatic. the ai creates them during cross-referencing. you never have to manually link pages.
+
+## how the graph builds
+
+the graph starts sparse. first few sources, a handful of pages, minimal connections.
+
+as more sources come in, the graph densifies:
+
+- new entities get their own pages and link to existing concepts
+- existing pages accumulate more backlinks as they get referenced
+- patterns emerge. clusters of tightly connected pages around key topics
+- contradictions surface between pages that were written from different sources
+- hub pages form naturally. your most important concepts attract the most links
+
+the graph doesnt just grow linearly. it compounds. each new source creates connections to what already exists, making every existing page more valuable.
+
+## the graph visualization
+
+the knowledge graph view shows your knowledge as an interactive node graph.
+
+<CardGroup cols={2}>
+  <Card title="nodes" icon="circle-dot">
+    each wiki page is a node, sized by how many connections it has
+  </Card>
+  <Card title="edges" icon="share-2">
+    links between pages, colored by type (contradictions stand out in red)
+  </Card>
+  <Card title="clusters" icon="network">
+    tightly connected pages form visible clusters around key topics
+  </Card>
+  <Card title="navigation" icon="move">
+    click any node to open the page, zoom and pan to explore, filter by link type or page type
+  </Card>
+</CardGroup>
+
+the graph updates in real-time. when an ingest is running and new pages are being created, you can watch the graph grow and new connections form.
+
+<Card title="next: health" icon="arrow-right" href="/knowledge/health">
+  keeping the knowledge base accurate — contradictions, staleness, gaps, and the lint system.
+</Card>

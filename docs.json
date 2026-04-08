@@ -53,7 +53,19 @@
               "agents/overview",
               "agents/impact-scorer",
               "agents/built-in",
-              "agents/available"
+              "agents/available",
+              "agents/agents-page"
+            ]
+          },
+          {
+            "group": "Knowledge",
+            "pages": [
+              "knowledge/overview",
+              "knowledge/sources",
+              "knowledge/pages",
+              "knowledge/graph",
+              "knowledge/health",
+              "knowledge/enrichment"
             ]
           },
           {

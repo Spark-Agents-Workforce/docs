@@ -1,0 +1,73 @@
+---
+title: 'health'
+description: 'keeping the knowledge base accurate — contradictions, staleness, gaps, and the lint system.'
+icon: 'shield-check'
+---
+
+a knowledge base that nobody maintains eventually lies to you. pages go stale. contradictions creep in. important concepts get mentioned but never explained. sources get outdated.
+
+sparks knowledge health system prevents this. the knowledge lint agent monitors your wiki and surfaces problems before they erode trust.
+
+## what it checks
+
+<CardGroup cols={2}>
+  <Card title="contradictions" icon="octagon-alert">
+    two pages that disagree. "page a says we use postgres. page b says we migrated to convex." the ai identifies conflicting claims across pages and flags them with the specific excerpts that conflict.
+  </Card>
+  <Card title="stale pages" icon="clock-3">
+    pages that havent been updated despite newer sources arriving on the same topic. if you ingested a competitor analysis in january and havent updated it since, but three newer sources mention that competitor, the page is stale.
+  </Card>
+  <Card title="orphans" icon="unlink">
+    pages with no inbound links. nobody references them. are they still relevant, or have they drifted away from the rest of the knowledge base?
+  </Card>
+  <Card title="gaps" icon="search-x">
+    concepts referenced across multiple pages but lacking their own dedicated page. "react server components is mentioned in 5 pages but doesnt have its own page." the ai can auto-create missing pages or flag them for human review.
+  </Card>
+  <Card title="low confidence" icon="triangle-alert">
+    pages built from a single source. they might be correct, but they havent been corroborated. more sources covering the same topic increases confidence.
+  </Card>
+  <Card title="unsourced claims" icon="triangle-alert">
+    assertions on a page that cant be traced back to any source. how did this get here? maybe it was manually added, maybe its a synthesis artifact. either way, it needs attribution.
+  </Card>
+</CardGroup>
+
+## the knowledge lint agent
+
+the lint agent is itself a watch + evaluate pattern:
+
+<Steps>
+  <Step title="watch" icon="radio">
+    monitors the state of the knowledge base: page ages, reference patterns, source coverage, claim attributions
+  </Step>
+  <Step title="evaluate" icon="scan">
+    identifies health issues, classifies severity, suggests fixes
+  </Step>
+</Steps>
+
+it runs periodically. when it finds issues, they surface on the health dashboard with severity ratings.
+
+for many issues, the ai can auto-resolve:
+
+- stale pages can be refreshed from newer sources
+- missing pages can be auto-created from existing references
+- low-confidence pages can be flagged with a note explaining the limitation
+
+contradictions and unsourced claims usually need human review. the ai flags them and shows the conflicting evidence, but a person decides which version is correct.
+
+## the health dashboard
+
+the health page shows:
+
+| section | detail |
+|---------|--------|
+| **issue count by type** | how many contradictions, stale pages, orphans, gaps |
+| **severity distribution** | critical, warning, info |
+| **trending** | is health improving or degrading over time? |
+| **individual issues** | each one with the affected pages, the evidence, and a suggested resolution |
+| **resolved history** | what was fixed and when |
+
+<Tip>enable the knowledge lint agent when your knowledge base has enough pages that maintenance matters. typically after 50+ pages. below that, manual review is enough.</Tip>
+
+<Card title="next: enrichment" icon="arrow-right" href="/knowledge/enrichment">
+  how spark goes beyond what you feed it — live web research, gap-filling, and active intelligence.
+</Card>

@@ -1,0 +1,78 @@
+---
+title: 'the agents page'
+description: 'your fleet management view — see, control, and monitor your ai agents.'
+icon: 'layout-dashboard'
+---
+
+the agents page is the command center for your ai fleet. this is where you see whats running, enable new agents, and monitor what your agents are doing.
+
+## the pattern header
+
+three cards across the top explain the framework at a glance:
+
+<CardGroup cols={3}>
+  <Card title="watch" icon="eye">
+    monitors an event stream from connected tools
+  </Card>
+  <Card title="evaluate" icon="brain">
+    ai decides what each event means
+  </Card>
+  <Card title="act" icon="zap">
+    routes, scores, alerts, or updates
+  </Card>
+</CardGroup>
+
+three seconds. thats how long it takes to understand what agents do. watch something, think about it, do something about it.
+
+## active agents
+
+below the header: your running agents. each one shows:
+
+| item | what it shows |
+|------|---------------|
+| **green dot** | its on and processing |
+| **name and description** | what it does in one line |
+| **last action** | when it last did something and what it did |
+| **toggle** | turn it off if you need to |
+
+active agents are your teams intelligence layer. theyre running right now, watching your streams, producing scores, summaries, signals, and knowledge.
+
+## available agents
+
+below your active agents: the catalog of agents you can enable.
+
+| item | what it shows |
+|------|---------------|
+| **gray dot** | available but not running |
+| **name and description** | what it would watch and do |
+| **enable button** | one click to activate |
+
+each available agent is a specialist waiting to be activated. pr quality, slack urgency, deploy watcher. you add them as your needs grow.
+
+## action log
+
+at the bottom: a chronological log of everything your agents did.
+
+<Note>
+  "impact scorer scored session #482 at 156 points."
+
+  "synthesis generator published daily summary."
+
+  "signal puller detected 3 urgent slack messages."
+
+  "knowledge ingest processed quarterly-review.pdf. created 4 pages, updated 8."
+
+  "knowledge lint found 2 contradictions in the react documentation pages."
+</Note>
+
+the action log makes the invisible visible. your agents work in the background. this is where you see their output, verify theyre doing the right things, and catch anything that needs attention.
+
+## why this page matters
+
+the agents page is the real product page. the streams are plumbing. they flow whether you look at them or not. spark chat is the interface. you ask when you want to. but the agents page is where you decide **what intelligence runs on your data.**
+
+more agents = more intelligence = more value from the same streams. this is where the product grows with your team.
+
+<Card title="next: knowledge" icon="arrow-right" href="/knowledge/overview">
+  the second stream — a compounding knowledge base that gets smarter every day.
+</Card>
