@@ -71,18 +71,7 @@
       }
     ],
     "global": {
-      "anchors": [
-        {
-          "anchor": "App",
-          "href": "https://app.sparkagents.com",
-          "icon": "rocket"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://sparkagents.com/blog",
-          "icon": "newspaper"
-        }
-      ]
+      "anchors": []
     }
   },
   "navbar": {
